@@ -1,4 +1,5 @@
 package processor;
+
 import java.io.File;
 
 import java.io.IOException;
@@ -6,6 +7,9 @@ import java.nio.file.Path;
 import java.nio.file.Files;
 import java.util.LinkedList;
 import java.util.List;
+
+//import processor.InputHandler;
+//import processor.Caption;
 
 public class CaptionsProcessor {
 
@@ -81,7 +85,7 @@ public class CaptionsProcessor {
 	}
 
 	/**
-	 * Searches all Caption content in a specified List for a specified String and replaces each instance with another String.
+	 * Searches all Caption content in a specified List for a specified String (case-insensitively) and replaces each instance with another String.
 	 * @param captions The list of captions to be used
 	 * @param search The String to be replaced
 	 * @param replace The String with which to replace
@@ -90,14 +94,15 @@ public class CaptionsProcessor {
 	private static int searchAndReplace(List<Caption> captions, String search, String replace) {
 		if (ENABLE_CONSOLE_OUTPUT) System.out.print("Replacing \"" + search + "\" with \"" + replace + "\"... ");
 		int replacementsPerformed = 0;
-
+		String target = "(?i)" + search;
+		
 		for (Caption caption : captions) {
 			String originalContent = caption.getContent();
 			String unreplaced = originalContent;
-			String replaced = originalContent.replaceFirst(search, replace);
+			String replaced = originalContent.replaceFirst(target, replace);
 			while (unreplaced != replaced) {  //if something got replaced
 				unreplaced = replaced;
-				replaced = replaced.replaceFirst(search, replace); //try it again
+				replaced = replaced.replaceFirst(target, replace); //try it again
 				replacementsPerformed++;    //and note that something got replaced
 			}
 			caption.setContent(replaced);
@@ -214,7 +219,7 @@ public class CaptionsProcessor {
 		if (ENABLE_CONSOLE_OUTPUT) System.out.println(capitalizationsPerformed + " capitalizations performed");
 		return capitalizationsPerformed;
 	}
-
+	
 	/**
 	 * Prints the specified List of Captions with correct formatting.
 	 * @param captions The List of Captions to be printed
@@ -238,6 +243,7 @@ public class CaptionsProcessor {
 		List<Caption> captions = listToCaptions(lines);
 		//edits performed
 		searchAndReplace(captions, "space", "yiker");
+		searchAndReplace(captions, "peer to peer", "peer-to-peer");
 		removeMultipleSpaces(captions);
 		trimTrailingSpaces(captions);
 		capitalizeFirstLetters(captions);

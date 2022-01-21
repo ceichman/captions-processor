@@ -13,5 +13,5 @@ timing3
 
 4
 timing4
-notrim.
+notrim. peer to peer.  
 
