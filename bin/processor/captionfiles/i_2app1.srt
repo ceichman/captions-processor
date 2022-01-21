@@ -1,0 +1,4849 @@
+﻿1
+00:00:00,000 --> 00:00:06,750
+Moving onto the
+application Layer, Chapter 2.
+
+2
+00:00:06,750 --> 00:00:11,950
+We will talk about how
+the applications work.
+
+3
+00:00:11,950 --> 00:00:16,360
+And we will have three
+applications, if not more.
+
+4
+00:00:16,360 --> 00:00:21,901
+Three are HTTP, File
+transfer, email, and DNS -
+
+5
+00:00:21,926 --> 00:00:24,765
+Four, right there.
+And we will talk about how
+
+6
+00:00:24,797 --> 00:00:31,100
+peer to peer applications work. So
+we already talked about much of it.
+
+7
+00:00:31,100 --> 00:00:35,455
+I'm just going to kind of review it because
+
+8
+00:00:35,480 --> 00:00:38,632
+at least the protocol layers are
+repeated from the previous module.
+
+9
+00:00:38,656 --> 00:00:41,808
+And then we talk about client-
+
+10
+00:00:41,808 --> 00:00:47,225
+server versus peer to peer. And some basic
+concepts of names, addresses, and ports.
+
+11
+00:00:47,225 --> 00:00:51,380
+Now here's the issue why we have to talk
+about names, addresses, and ports before
+
+12
+00:00:51,380 --> 00:00:54,516
+we go into applications.
+This particular
+
+13
+00:00:54,528 --> 00:00:58,060
+book that we're following
+is called top-down.
+
+14
+00:00:58,060 --> 00:01:00,439
+And top-down means
+that it covers the
+
+15
+00:01:00,464 --> 00:01:04,040
+application layer first
+and then it goes down.
+
+16
+00:01:04,040 --> 00:01:07,555
+And that is non-traditional
+in the sense that you need
+
+17
+00:01:07,556 --> 00:01:11,131
+to know IP before you can understand
+TCP, and you need to know TCP before
+
+18
+00:01:11,131 --> 00:01:13,679
+you can understand
+applications. So this is
+
+19
+00:01:13,691 --> 00:01:16,310
+the first book that was
+written upside down.
+
+20
+00:01:16,310 --> 00:01:19,848
+And to do that we need to tell you
+a little bit about these lower layers
+
+21
+00:01:19,848 --> 00:01:25,810
+before we go into the applications. So
+that is what we're doing in this module.
+
+22
+00:01:25,810 --> 00:01:29,830
+And the other part of this -
+
+23
+00:01:37,910 --> 00:01:42,441
+So for the applications
+
+24
+00:01:44,390 --> 00:01:50,060
+Battery was not taken out last time.
+
+25
+00:01:50,060 --> 00:01:56,440
+Just put the battery in, OK
+then. Alright, let's go to this.
+
+26
+00:02:02,380 --> 00:02:05,145
+So, these are the
+applications that we're
+
+27
+00:02:05,157 --> 00:02:08,264
+going to talk about.
+They all run on TCP, UDP.
+
+28
+00:02:08,264 --> 00:02:13,589
+Actually, these two run on UDP,
+these four run on TCP; and down.
+
+29
+00:02:13,590 --> 00:02:19,570
+We already know that kind of layer
+diagram, right? So let's talk about how
+
+30
+00:02:19,570 --> 00:02:22,369
+the applications work.
+There are two kinds of
+
+31
+00:02:22,381 --> 00:02:25,130
+applications, client-server
+or peer-to-peer.
+
+32
+00:02:25,130 --> 00:02:29,710
+Client-server is, we talked about
+it in the very first or second class,
+
+33
+00:02:29,710 --> 00:02:32,930
+we said that there's a server
+
+34
+00:02:32,930 --> 00:02:37,352
+somewhere and then
+the clients all approach it.
+
+35
+00:02:37,352 --> 00:02:41,131
+Or request something from
+it, so it's a client-requested
+
+36
+00:02:41,143 --> 00:02:43,870
+service. The server
+provides the service
+
+37
+00:02:43,870 --> 00:02:49,908
+and it's just always on, always
+waiting. A web server is a good example,
+
+38
+00:02:49,908 --> 00:02:55,350
+if you have a web server you have to leave
+it on 24 hours a day, seven days a week.
+
+39
+00:02:55,350 --> 00:03:01,370
+Anybody can come in anytime and
+request that page. Severs are always up
+
+40
+00:03:01,370 --> 00:03:03,424
+and clients do not
+communicate directly with
+
+41
+00:03:03,436 --> 00:03:05,502
+each other. The clients
+don't know who other
+
+42
+00:03:05,502 --> 00:03:07,906
+clients are and the
+server is generally kept
+
+43
+00:03:07,918 --> 00:03:10,495
+in a data center. An
+example is the best server
+
+44
+00:03:10,495 --> 00:03:13,729
+search engine like Google or
+a social network like Facebook.
+
+45
+00:03:18,040 --> 00:03:22,450
+Right? If there are any questions,
+please raise your hand at any time.
+
+46
+00:03:22,450 --> 00:03:25,464
+OK, so I'm going to keep moving -
+
+47
+00:03:25,464 --> 00:03:31,120
+Peer to peer works differently.
+Peer to peer, all of you know -
+
+48
+00:03:31,120 --> 00:03:34,795
+how many of you have used
+torrents? Alright. Those of you
+
+49
+00:03:34,795 --> 00:03:40,050
+who have not raised a hand,
+please do. Not a bad thing,
+
+50
+00:03:40,050 --> 00:03:45,880
+because that is what you will learn in this
+lecture, is that it's much more efficient.
+
+51
+00:03:45,880 --> 00:03:51,776
+Than doing it the way we used to do
+before. And in fact, all the big companies,
+
+52
+00:03:51,776 --> 00:03:53,981
+including Microsoft and
+other companies that
+
+53
+00:03:53,993 --> 00:03:56,210
+distribute their software,
+use peer to peer.
+
+54
+00:03:56,210 --> 00:03:58,360
+So let me start with
+that. OK, peer to peer
+
+55
+00:03:58,372 --> 00:04:00,730
+means that you gave
+your file to somebody else.
+
+56
+00:04:00,730 --> 00:04:05,202
+Somebody gives you a file to you and so on.
+So this is just between the people, between
+
+57
+00:04:05,202 --> 00:04:10,480
+the clients, the files are exchanged.
+
+58
+00:04:10,480 --> 00:04:16,964
+Understood? Peer-to-peer.
+So your phone is going to
+
+59
+00:04:16,964 --> 00:04:20,283
+give something to this computer,
+and this phone is going to give it to this
+
+60
+00:04:20,284 --> 00:04:25,140
+computer and this computer is going to
+give it to that phone and so on so forth.
+
+61
+00:04:25,140 --> 00:04:30,180
+Alright? And so the hosts
+communicate directly -
+
+62
+00:04:30,180 --> 00:04:32,653
+and so they are called peers.
+
+63
+00:04:32,678 --> 00:04:36,398
+And the host may come on or
+off anytime. So that's the problem.
+
+64
+00:04:36,398 --> 00:04:41,920
+If you expected a file from somebody
+and they're not there, what do you do?
+
+65
+00:04:41,920 --> 00:04:47,007
+Right? So file sharing with BitTorrent,
+emule, Limewire, telefony, Skype,
+
+66
+00:04:47,032 --> 00:04:49,393
+They are all examples
+of peer-to-peer, I mean
+
+67
+00:04:49,405 --> 00:04:52,502
+Telephony. If your mom
+is not there, you call.
+
+68
+00:04:52,502 --> 00:04:57,150
+You know, I mean, that's a big problem,
+but if you just want to call anybody,
+
+69
+00:04:57,150 --> 00:05:00,018
+I'm sure you will find
+somebody. So that is the
+
+70
+00:05:00,049 --> 00:05:03,130
+situation here, is that
+if you want to get a file,
+
+71
+00:05:03,130 --> 00:05:09,046
+somebody might have it and you might get
+it at any time. And it's highly scalable,
+
+72
+00:05:09,046 --> 00:05:13,424
+so this one scales very well.
+You could have millions of people
+
+73
+00:05:13,424 --> 00:05:17,843
+sharing a movie or whatever it is
+they want to share, and as opposed
+
+74
+00:05:17,843 --> 00:05:24,155
+to on your server, it will
+just get overloaded. OK.
+
+75
+00:05:24,155 --> 00:05:30,413
+So it is highly symmetric traffic.
+So what happens is upload goes up,
+
+76
+00:05:30,413 --> 00:05:37,350
+with this traffic, you upload a lot.
+And so the traffic becomes symmetric.
+
+77
+00:05:37,350 --> 00:05:40,451
+Symmetric means the
+download and upload become
+
+78
+00:05:40,463 --> 00:05:43,312
+equal. Normally you
+don't upload anything,
+
+79
+00:05:43,337 --> 00:05:46,493
+You generally download
+more, 10 times more than
+
+80
+00:05:46,538 --> 00:05:50,599
+the upload, or 100 times
+more sometimes, and so
+
+81
+00:05:50,624 --> 00:05:52,721
+that is what the networks
+are designed for. And
+
+82
+00:05:52,733 --> 00:05:55,790
+there are other reasons,
+but that is one reason.
+
+83
+00:05:55,790 --> 00:06:01,940
+So with peer to peer, the
+carriers don't like it because now
+
+84
+00:06:01,940 --> 00:06:05,500
+their networks become the bottleneck.
+Their links become the bottleneck.
+
+85
+00:06:05,500 --> 00:06:09,111
+You become unhappy with them
+because you are not able to upload at the
+
+86
+00:06:09,111 --> 00:06:12,775
+speed that you want to. OK.
+
+87
+00:06:12,775 --> 00:06:17,010
+Second thing is, it's
+difficult to authenticate.
+
+88
+00:06:17,010 --> 00:06:22,014
+You don't know who you are
+talking to. You don't know the program
+
+89
+00:06:22,014 --> 00:06:25,844
+that you are getting, and don't
+get programs by torrent, by the way.
+
+90
+00:06:25,844 --> 00:06:28,779
+The program you're
+getting is authentic. OK, it is
+
+91
+00:06:28,791 --> 00:06:31,680
+not a virus. It doesn't
+have a virus, or whatever
+
+92
+00:06:31,680 --> 00:06:38,031
+it is, right? So it's very insecure.
+Users need incentives, as the
+
+93
+00:06:38,056 --> 00:06:41,470
+second thing, is why would somebody
+want to give you something for free?
+
+94
+00:06:41,470 --> 00:06:46,684
+So there is a reason for that.
+BitTorrent has been designed for that.
+
+95
+00:06:46,865 --> 00:06:51,539
+[student question]
+
+96
+00:06:51,680 --> 00:06:57,600
+Yeah, so they do authenticate. I
+mean, in that case, it is not unknown here.
+
+97
+00:07:01,240 --> 00:07:04,030
+Process communication, now
+this is a little bit about Linux.
+
+98
+00:07:04,030 --> 00:07:06,216
+An operating systems
+course, actually not
+
+99
+00:07:06,228 --> 00:07:08,584
+Linux. It is an operating
+systems course and
+
+100
+00:07:08,584 --> 00:07:12,942
+Linux is just one operating system,
+Windows is another, and Mac is some
+
+101
+00:07:12,942 --> 00:07:18,421
+version of Linux. So in most operating
+systems, and particularly Linux,
+
+102
+00:07:18,421 --> 00:07:21,620
+actually, Linux is a son of Unix,
+
+103
+00:07:21,620 --> 00:07:25,160
+So in the case of Unix.
+
+104
+00:07:25,160 --> 00:07:29,008
+And Unix was designed
+a long time ago by AT&T,
+
+105
+00:07:29,008 --> 00:07:33,900
+so Unix, they gave the name socket.
+
+106
+00:07:33,900 --> 00:07:38,340
+They gave the name socket to the
+place where you can talk to a process.
+
+107
+00:07:38,340 --> 00:07:41,592
+So if you have a process
+running, and there is
+
+108
+00:07:41,604 --> 00:07:44,799
+a process here, a process
+here, two processes
+
+109
+00:07:44,799 --> 00:07:47,605
+running on the same
+computer. One process
+
+110
+00:07:47,617 --> 00:07:50,770
+wants to give some data
+to the second process.
+
+111
+00:07:50,770 --> 00:07:54,596
+It will open a socket. OK,
+
+112
+00:07:54,596 --> 00:07:58,150
+OK, so the same thing
+continues in networking. Now,
+
+113
+00:07:58,162 --> 00:08:01,590
+these two processes are
+not on the same computer.
+
+114
+00:08:01,590 --> 00:08:06,422
+They are on different computers.
+Right, and this computer wants to
+
+115
+00:08:06,422 --> 00:08:09,066
+give something to the
+other computer. So then you
+
+116
+00:08:09,091 --> 00:08:13,420
+open a socket to listen and
+open a socket to connect.
+
+117
+00:08:13,420 --> 00:08:18,280
+OK, so this socket is
+the name that Linux uses.
+
+118
+00:08:23,520 --> 00:08:24,690
+So now this is something
+
+119
+00:08:24,690 --> 00:08:30,602
+that I assume that all of you already
+know from computer science is that
+
+120
+00:08:30,627 --> 00:08:35,736
+the user part is the user domain
+and the operating system part, right?
+
+121
+00:08:35,761 --> 00:08:41,009
+There you cannot mess up at all. So in
+the operating system, we have protocols,
+
+122
+00:08:41,010 --> 00:08:46,850
+TCP, IP, and so on. And the user
+can control these processes up to here.
+
+123
+00:08:46,850 --> 00:08:51,769
+So basically when they want to send
+something, they send it by a socket to the
+
+124
+00:08:51,769 --> 00:08:55,175
+local TCP-IP module and
+the TCP-IP module tells
+
+125
+00:08:55,187 --> 00:08:58,320
+the remote TCP-IP
+module, and by the socket
+
+126
+00:08:58,345 --> 00:09:00,227
+it comes to the next part.
+
+127
+00:09:04,099 --> 00:09:07,615
+So I forgot the name. What they
+call it on the Windows system.
+
+128
+00:09:07,640 --> 00:09:11,420
+I think they call them ports. I think. I
+mean, I could be wrong on that one,
+
+129
+00:09:11,420 --> 00:09:17,555
+but the port is coming right next to it. I
+don't know. I mean, the answer to what
+
+130
+00:09:17,555 --> 00:09:21,056
+are they called on Windows? They
+might be called sockets too because
+
+131
+00:09:21,056 --> 00:09:25,108
+The thing is Windows and
+
+132
+00:09:25,108 --> 00:09:28,655
+Unix came almost at the same time. OK,
+
+133
+00:09:28,655 --> 00:09:33,650
+so it's not that one borrowed from the
+other. They were independently done,
+
+134
+00:09:33,650 --> 00:09:36,808
+although having said
+that, that was early in
+
+135
+00:09:36,820 --> 00:09:39,919
+the game. Later on,
+Unix went like this and
+
+136
+00:09:39,919 --> 00:09:41,374
+Windows probably followed it.
+
+137
+00:09:51,520 --> 00:09:54,649
+Yeah, so originally the
+socket was for inside one
+
+138
+00:09:54,661 --> 00:09:57,740
+system. Now we are going
+to use multiple systems
+
+139
+00:09:57,740 --> 00:10:02,444
+and so we're not going to...
+The multiple systems we use with
+
+140
+00:10:02,444 --> 00:10:06,880
+all these ports, turns out we call it a
+port, so it is coming up in the next slide
+
+141
+00:10:06,880 --> 00:10:10,854
+So hold on to that
+thought, right? So a port
+
+142
+00:10:10,866 --> 00:10:14,498
+is where you dock
+in, where you connect,
+
+143
+00:10:14,523 --> 00:10:16,830
+Right, I mean if any ship comes in,
+
+144
+00:10:16,830 --> 00:10:23,668
+it goes to the port. Right, so
+same way, Here, when you -
+
+145
+00:10:23,668 --> 00:10:26,516
+so that is the word that
+has been borrowed for the
+
+146
+00:10:26,528 --> 00:10:29,220
+computer system. This
+is not a computer system,
+
+147
+00:10:29,220 --> 00:10:34,942
+but we have borrowed that word and
+when you connect to some computer we call
+
+148
+00:10:34,942 --> 00:10:38,240
+it a port at the point when you connect.
+
+149
+00:10:38,240 --> 00:10:43,340
+So every computer has thousands
+of ports. Most of them are closed,
+
+150
+00:10:43,340 --> 00:10:46,640
+but maybe 510 are open.
+
+151
+00:10:46,640 --> 00:10:50,030
+OK, so there is a port
+number 80 for example.
+
+152
+00:10:50,030 --> 00:10:54,720
+OK, port number 80 is for HTTP, for that
+
+153
+00:10:54,720 --> 00:10:58,919
+If on your computer you use a web
+server, what the web server will do is open
+
+154
+00:10:58,919 --> 00:11:03,450
+the Port 80 on your computer. Anybody
+can connect to that computer on Port 80.
+
+155
+00:11:07,170 --> 00:11:09,570
+OK, and you don't have to use Port 80.
+
+156
+00:11:09,570 --> 00:11:12,383
+You can use port 8080.
+You can use port 81. You
+
+157
+00:11:12,395 --> 00:11:15,220
+can use port 4001. But
+people have to know what
+
+158
+00:11:15,220 --> 00:11:18,067
+port you have opened so
+they can connect to that port.
+
+159
+00:11:26,976 --> 00:11:29,149
+Yeah. Exactly, so the question is
+
+160
+00:11:29,174 --> 00:11:34,340
+when you write on a web server, the
+IP address colon, something that thing.
+
+161
+00:11:34,340 --> 00:11:38,230
+Something after the colon
+is the port number. Yeah.
+
+162
+00:11:42,030 --> 00:11:45,620
+Does the computer tell
+which ports are open?
+
+163
+00:11:45,620 --> 00:11:49,200
+Huh? Can you speak loudly, please?
+
+164
+00:11:54,950 --> 00:11:57,817
+What is the point of
+having closed ports? So
+
+165
+00:11:57,829 --> 00:12:01,028
+that is security. You
+don't want... I mean I lock
+
+166
+00:12:01,028 --> 00:12:05,740
+all the ports, at my home they are
+closed. OK, because I locked it totally,
+
+167
+00:12:05,740 --> 00:12:07,010
+nobody can come in.
+
+168
+00:12:09,220 --> 00:12:13,560
+Right? So security. Yeah.
+
+169
+00:12:20,933 --> 00:12:22,056
+OK, everybody speak loudly.
+
+170
+00:12:22,056 --> 00:12:24,119
+I have been hearing
+it but still I cannot hear
+
+171
+00:12:24,131 --> 00:12:26,250
+you so I don't know.
+Maybe they're not working.
+
+172
+00:12:26,250 --> 00:12:32,983
+Yeah, go ahead. OK, so question:
+why there are so many ports then?
+
+173
+00:12:32,983 --> 00:12:37,510
+If only a few of them are being
+used? OK, well, I'm in my home,
+
+174
+00:12:37,510 --> 00:12:41,726
+I have 26 cameras and I need 26
+cam ports just for those 26 cameras.
+
+175
+00:12:44,210 --> 00:12:49,783
+Right now you can count from that,
+OK. So you need one port for everything,
+
+176
+00:12:49,783 --> 00:12:52,970
+you know, for one application.
+
+177
+00:12:56,120 --> 00:12:59,552
+If a port is closed, can we use it
+locally? No. The port is closed means
+
+178
+00:12:59,577 --> 00:13:04,450
+nobody can use it inside or outside.
+Alright? Good questions so far.
+
+179
+00:13:04,450 --> 00:13:06,877
+So interprocess
+communication on the same host.
+
+180
+00:13:06,889 --> 00:13:09,480
+The operating system
+provides the message passing.
+
+181
+00:13:09,480 --> 00:13:13,414
+And Unix systems called this a
+socket, and this is a socket right here
+
+182
+00:13:13,439 --> 00:13:17,140
+It is a socket.
+
+183
+00:13:17,140 --> 00:13:22,950
+Right? But now we're having
+communication between the computers and so
+
+184
+00:13:22,950 --> 00:13:27,680
+On the different hosts, we have to go
+through the network, and we call it a port
+
+185
+00:13:27,680 --> 00:13:33,707
+OK, so the port is not here, the
+port is right there. It's right there.
+
+186
+00:13:33,707 --> 00:13:38,570
+OK, so in the network. OK and TCP-IP
+
+187
+00:13:38,570 --> 00:13:40,901
+connects only to a port from outside.
+
+188
+00:13:43,580 --> 00:13:50,060
+OK. So now you understand
+the port and you know the socket.
+
+189
+00:13:50,060 --> 00:13:56,410
+So there are a few more things, names,
+so you need to go to the IP address.
+
+190
+00:13:56,410 --> 00:13:58,371
+The IP address is written
+down here as shown
+
+191
+00:13:58,383 --> 00:14:00,180
+before, but generally,
+we don't remember
+
+192
+00:14:00,180 --> 00:14:05,566
+the numbers, we write a name.
+And that name gets translated into
+
+193
+00:14:05,566 --> 00:14:11,670
+the number inside your computer.
+OK, so in the network, we only use
+
+194
+00:14:11,670 --> 00:14:16,830
+a binary address, not even
+decimal. But for people,
+
+195
+00:14:16,830 --> 00:14:20,038
+human beings that is a
+decimal. And so we use
+
+196
+00:14:20,050 --> 00:14:23,200
+a 32-bit address and
+we put the port number,
+
+197
+00:14:23,200 --> 00:14:29,928
+which is the entry point at that address,
+and so for example, 21 is FTP and
+
+198
+00:14:29,928 --> 00:14:32,723
+80 is HTTP. Right?
+
+199
+00:14:41,095 --> 00:14:46,241
+OK, so why is port 80 for HTTP? So
+there is an organization called IETF
+
+200
+00:14:46,266 --> 00:14:51,109
+Internet Engineering Task Force, which
+wrote this protocol and when they write a
+
+201
+00:14:51,109 --> 00:14:55,152
+protocol they decide what is the standard.
+If nobody told you and you are trying to
+
+202
+00:14:55,152 --> 00:14:58,574
+go to a web server, you
+go to port 80, but if they
+
+203
+00:14:58,586 --> 00:15:01,750
+tell you that no, no,
+no, we don't come for 80
+
+204
+00:15:01,750 --> 00:15:07,740
+I can come for 8080. Then you go to
+Port 8080 but they have to tell you that.
+
+205
+00:15:07,740 --> 00:15:14,182
+Port 80 is the standard
+HTTP port. By default.
+
+206
+00:15:19,420 --> 00:15:22,372
+Each? I'm sorry. What is the question?
+
+207
+00:15:25,530 --> 00:15:28,628
+Oh OK, you question is that HTTPS
+
+208
+00:15:28,628 --> 00:15:32,601
+Secure HTTP, does it use the same
+port or a different port? That could,
+
+209
+00:15:32,601 --> 00:15:35,612
+I think it is probably the
+same port, but it could be
+
+210
+00:15:35,624 --> 00:15:38,536
+negotiated. What happens
+is, as will come later on,
+
+211
+00:15:38,561 --> 00:15:41,556
+First you connect with
+HTTP and then you negotiate
+
+212
+00:15:41,568 --> 00:15:44,458
+security. I mean, but
+firstly when you connect -
+
+213
+00:15:44,458 --> 00:15:49,600
+At least in the case of Mail,
+I know for sure in the case of
+
+214
+00:15:49,600 --> 00:15:52,624
+Mail we use 547, 447 etc etc,
+
+215
+00:15:52,624 --> 00:15:56,430
+which is for secure Mail as compared to
+
+216
+00:15:56,430 --> 00:16:01,040
+25 for insecure mail.
+So we use different ports.
+
+217
+00:16:01,040 --> 00:16:06,650
+Alright, I think it is different ports
+
+218
+00:16:06,650 --> 00:16:08,791
+so the answer to your
+question is a different port,
+
+219
+00:16:08,803 --> 00:16:11,038
+because when you come
+to that different port we don't
+
+220
+00:16:11,038 --> 00:16:14,567
+give you any information until we
+have gotten your security cleared.
+
+221
+00:16:17,000 --> 00:16:22,560
+Alright. So we got that.
+
+222
+00:16:22,560 --> 00:16:27,910
+There are two transport protocols.
+TCP and UDP. The main difference
+
+223
+00:16:27,910 --> 00:16:30,928
+is that TCP is reliable.
+Reliable means once
+
+224
+00:16:30,940 --> 00:16:34,240
+you give it to something
+to give it to somebody,
+
+225
+00:16:34,240 --> 00:16:39,820
+you can know, just like
+FedEx, UPS, that it's reliable.
+
+226
+00:16:39,820 --> 00:16:43,137
+Packet sequence number is required,
+and therefore each packet has a number,
+
+227
+00:16:43,162 --> 00:16:50,815
+1, 2, 3, 4, 5, 6, and each packet gets
+acked, so when it reaches the destination
+
+228
+00:16:50,815 --> 00:16:55,790
+it gets acknowledged. I
+got four, I got five I got 6.
+
+229
+00:16:55,790 --> 00:17:01,000
+And lost packets are retransmitted.
+If you got four and six but didn't get 5,
+
+230
+00:17:01,000 --> 00:17:03,139
+something happened to
+five. We have to resend it.
+
+231
+00:17:06,130 --> 00:17:09,384
+And therefore it may
+cause long delays. Because
+
+232
+00:17:09,396 --> 00:17:12,798
+you know, if you're sending
+it to Germany and now
+
+233
+00:17:12,799 --> 00:17:16,700
+suddenly you heard that next three
+days later that they didn't get box #5.
+
+234
+00:17:16,700 --> 00:17:22,200
+You have to resend five before TCP will
+give the whole thing to the next person.
+
+235
+00:17:22,200 --> 00:17:25,322
+So the TCP reassembles
+the whole packet, right? So
+
+236
+00:17:25,334 --> 00:17:28,467
+it may cause delays.
+Connection-oriented service -
+
+237
+00:17:28,467 --> 00:17:32,659
+and it is therefore connection
+oriented. Now this is a difference.
+
+238
+00:17:32,660 --> 00:17:35,959
+Some people get confused between
+the TCP connection and the connection
+
+239
+00:17:35,959 --> 00:17:39,490
+we talked about in the telephone
+network. In the telephone network,
+
+240
+00:17:39,490 --> 00:17:46,450
+The path is predetermined. Right, and
+that path is followed by every single bit.
+
+241
+00:17:46,450 --> 00:17:51,210
+In this case, the path is not
+determined, but the ends are determined,
+
+242
+00:17:51,210 --> 00:17:57,340
+and before the first bit goes
+around, the TCP will set up a
+
+243
+00:17:57,365 --> 00:18:02,040
+connection with an end-to-end connection.
+So this is only end-to-end connection.
+
+244
+00:18:02,040 --> 00:18:04,639
+OK, and the path can keep
+changing. Something can
+
+245
+00:18:04,651 --> 00:18:07,106
+break, something can
+come, but the connection.
+
+246
+00:18:07,106 --> 00:18:11,390
+Packets will find the destination
+and once they reach the destination,
+
+247
+00:18:11,390 --> 00:18:14,695
+the destination TCP will
+count the packet number
+
+248
+00:18:14,707 --> 00:18:18,160
+and so on, so forth. Send
+the acknowledgment back.
+
+249
+00:18:18,160 --> 00:18:21,460
+And so it is an end-to-end
+connection. Yeah.
+
+250
+00:18:21,460 --> 00:18:26,760
+Does each packet had the same path?
+
+251
+00:18:26,760 --> 00:18:32,825
+The answer is no. Each packet could have a
+different path, and that's the whole reason
+
+252
+00:18:32,825 --> 00:18:36,659
+for going to the Internet rather
+than the old telephone network.
+
+253
+00:18:38,020 --> 00:18:42,970
+Alright. Good for reliable and
+delay insensitive applications,
+
+254
+00:18:42,970 --> 00:18:45,211
+so it is good for if you
+need that reliability,
+
+255
+00:18:45,223 --> 00:18:46,960
+so if you are sending
+your paycheck,
+
+256
+00:18:46,960 --> 00:18:51,948
+Better send it by TCP. Right?
+Because if 1 digit was missing
+
+257
+00:18:51,948 --> 00:18:56,670
+in that number instead of 10,000
+you got 1000, you will be very unhappy
+
+258
+00:18:56,670 --> 00:19:00,966
+so you want everything to
+be reaching their destinations.
+
+259
+00:19:00,966 --> 00:19:02,799
+Applications -
+
+260
+00:19:03,410 --> 00:19:07,130
+Email, HTTP, FTP and remote
+
+261
+00:19:07,130 --> 00:19:09,998
+These are the applications
+that use TCP. UDP,
+
+262
+00:19:10,010 --> 00:19:13,140
+now if you have this, why
+do we need another one?
+
+263
+00:19:13,140 --> 00:19:17,680
+We have some applications which
+cannot wait and so they use UDP.
+
+264
+00:19:17,680 --> 00:19:19,724
+UDP is unreliable.
+
+265
+00:19:22,050 --> 00:19:27,880
+So there is no need for a sequence
+number, if you want to put it,
+
+266
+00:19:27,880 --> 00:19:31,770
+you can put it, but it is not required.
+You just send the packet, it's delivered,
+
+267
+00:19:31,770 --> 00:19:37,496
+got it, didn't get it, too bad. OK.
+
+268
+00:19:37,496 --> 00:19:44,262
+Not acked, no retransmission.
+There is no question of waiting
+
+269
+00:19:44,262 --> 00:19:48,302
+for anything, the packets come
+and go. Packages come and go.
+
+270
+00:19:48,302 --> 00:19:52,420
+Connectionless Service, You don't
+need to set up a connection beforehand.
+
+271
+00:19:52,420 --> 00:19:55,543
+The end-to-end
+connection. It is good for
+
+272
+00:19:55,555 --> 00:19:58,914
+loss tolerant,
+delay-sensitive applications.
+
+273
+00:20:00,054 --> 00:20:05,850
+Can you think of a loss-tolerant,
+delay-sensitive application? Anybody?
+
+274
+00:20:10,170 --> 00:20:16,928
+Video! Zoom, right! So anything
+such as TV, video, or even voice.
+
+275
+00:20:16,928 --> 00:20:22,870
+You might not be getting 10% of
+my voice, but you can make it out.
+
+276
+00:20:22,870 --> 00:20:25,912
+That is loss-tolerant. Our
+ears have loss tolerance,
+
+277
+00:20:25,924 --> 00:20:28,460
+same thing for eyes.
+We have loss tolerance
+
+278
+00:20:28,460 --> 00:20:30,792
+If the package is not
+going to make it to the TV,
+
+279
+00:20:30,804 --> 00:20:33,195
+you know the TV can
+make it up for you. Basically,
+
+280
+00:20:33,195 --> 00:20:35,310
+TV's are designed to
+make up the packets for
+
+281
+00:20:35,322 --> 00:20:36,794
+you because what they
+do is they just put the
+
+282
+00:20:36,819 --> 00:20:39,446
+same previous screen
+and all you see is a
+
+283
+00:20:39,458 --> 00:20:41,700
+1-microsecond delay,
+or a 30-millisecond delay,
+
+284
+00:20:41,700 --> 00:20:47,901
+which you don't even see.
+Alright, so most of our senses
+
+285
+00:20:47,901 --> 00:20:51,300
+are loss tolerant and therefore...
+
+286
+00:20:51,300 --> 00:20:54,610
+but they are delay sensitive, so you cannot
+
+287
+00:20:54,610 --> 00:21:00,950
+make them wait for five minutes.
+And so Telephony, streaming.
+
+288
+00:21:00,950 --> 00:21:07,510
+Those are the applications
+that use UDP, Skype, Zoom. OK.
+
+289
+00:21:10,469 --> 00:21:13,345
+Alright. Any question about
+TCP/UDP? Yeah, there's a lot.
+
+290
+00:21:13,370 --> 00:21:16,459
+I mean, a whole TCP/UDP module coming up.
+
+291
+00:21:16,915 --> 00:21:24,915
+[student question]
+
+292
+00:21:28,900 --> 00:21:31,910
+How come DNS runs on UDP?
+So we will come to that, so just
+
+293
+00:21:31,922 --> 00:21:34,740
+hold on to that question.
+It's covered in this module.
+
+294
+00:21:34,740 --> 00:21:36,246
+DNS is covered in this module.
+
+295
+00:21:44,170 --> 00:21:47,265
+Alright, so back to the next module.
+
+296
+00:21:49,355 --> 00:21:50,630
+Application layer protocols -
+
+297
+00:21:50,655 --> 00:21:56,480
+HTTP, FTP, SMTP, DNS, P2P, Skype.
+
+298
+00:21:56,480 --> 00:22:00,480
+And so we'll go through them one by one.
+
+299
+00:22:00,480 --> 00:22:05,920
+And I put in red here "control plane."
+
+300
+00:22:05,920 --> 00:22:10,035
+So I have to introduce that
+word to you, is that there are some
+
+301
+00:22:10,035 --> 00:22:13,495
+applications that you have always
+used. There are some applications you
+
+302
+00:22:13,495 --> 00:22:15,807
+have never used, DNS,
+for example. You never
+
+303
+00:22:15,819 --> 00:22:18,040
+knew that there is a
+protocol called DNS -
+
+304
+00:22:18,040 --> 00:22:23,196
+Everybody knows, but
+generally, you don't use DNS
+
+305
+00:22:23,196 --> 00:22:26,530
+directly. DNS is used by the network.
+
+306
+00:22:26,530 --> 00:22:32,325
+By your computer, for you.
+So anything that the user
+
+307
+00:22:32,325 --> 00:22:38,832
+does is called the user plane.
+Anything that this system does to help
+
+308
+00:22:38,832 --> 00:22:40,982
+the user is called the control plane.
+
+309
+00:22:45,510 --> 00:22:51,850
+OK, so DNS is something
+that is done in the control plane.
+
+310
+00:22:51,850 --> 00:22:56,671
+It's done underneath your request, you
+are saying I want to go to www.google.com.
+
+311
+00:22:56,671 --> 00:23:01,110
+And the system will translate
+that name and put the IP address.
+
+312
+00:23:03,640 --> 00:23:05,942
+Right, that translation
+happens in the control plane.
+
+313
+00:23:08,700 --> 00:23:12,790
+Actually, in the telephony days, when you
+
+314
+00:23:12,790 --> 00:23:16,207
+you gave the phone number of
+your mom, the telephone company will
+
+315
+00:23:16,207 --> 00:23:19,197
+figure out where this
+phone number is, which city
+
+316
+00:23:19,209 --> 00:23:22,090
+it is and where it is
+right now at this minute.
+
+317
+00:23:22,090 --> 00:23:29,030
+Right, if it is a cell phone number,
+all that is in the control plane.
+
+318
+00:23:29,531 --> 00:23:34,833
+[student question]
+
+319
+00:23:35,890 --> 00:23:39,025
+Right, so the security
+part is control plane
+
+320
+00:23:44,890 --> 00:23:49,120
+OK, so just hold on to that. Yes,
+it is. But HTTP is coming next.
+
+321
+00:23:51,850 --> 00:23:53,945
+Alright, so this much
+is the architecture, and
+
+322
+00:23:53,970 --> 00:23:57,046
+this is the summary of
+the first part of chapter 2.
+
+323
+00:23:57,046 --> 00:24:02,660
+First is, you learned that P2P is
+more scalable than client-server.
+
+324
+00:24:02,660 --> 00:24:07,042
+The second thing you learned is that
+applications exchange messages using
+
+325
+00:24:07,067 --> 00:24:09,382
+operating system
+sockets and then the
+
+326
+00:24:09,394 --> 00:24:12,150
+applications communicate
+with the hostnames,
+
+327
+00:24:12,150 --> 00:24:15,258
+addresses and ports. So now you
+know what is a name, what is an address
+
+328
+00:24:15,258 --> 00:24:18,649
+What is a port, what
+is a socket, etc etc And
+
+329
+00:24:18,661 --> 00:24:22,064
+the applications use
+transports: TCP and UDP.
+
+330
+00:24:22,064 --> 00:24:26,089
+TCP is for reliability and
+UDP is for delay sensitivity.
+
+331
+00:24:29,730 --> 00:24:34,087
+OK, five key messages. So HTTP.
+
+332
+00:24:36,300 --> 00:24:39,350
+HTTP, we will go through the concept.
+
+333
+00:24:39,350 --> 00:24:43,875
+A sample web page, messages, cookies.
+
+334
+00:24:43,875 --> 00:24:46,758
+Servers, and conditions
+
+335
+00:24:46,853 --> 00:24:49,036
+So the concept,
+
+336
+00:24:50,810 --> 00:24:55,750
+And by the way, this is
+the work that was done.
+
+337
+00:24:55,750 --> 00:25:00,660
+in UIUC, I mean right here in Illinois
+
+338
+00:25:00,660 --> 00:25:04,090
+And now, I could be wrong on this one.
+
+339
+00:25:04,090 --> 00:25:09,980
+That the guy in France who
+discovered World Wide Web,
+
+340
+00:25:09,980 --> 00:25:14,020
+He probably just discovered
+
+341
+00:25:14,020 --> 00:25:17,190
+the basic infrastructure
+as to how to do it.
+
+342
+00:25:17,190 --> 00:25:22,848
+I don't know who wrote the first
+client. And I think the first time
+
+343
+00:25:22,848 --> 00:25:28,593
+was written in Illinois. And that became
+successful. And then the guy founded
+
+344
+00:25:28,593 --> 00:25:31,150
+the company is called
+Netscape. But I could be
+
+345
+00:25:31,162 --> 00:25:34,618
+totally wrong on this.
+OK, so this is the protocol
+
+346
+00:25:34,643 --> 00:25:35,940
+to get the web page.
+
+347
+00:25:41,140 --> 00:25:43,570
+And so you need a
+client which we call a
+
+348
+00:25:43,582 --> 00:25:46,500
+browser, and you have
+so many different browsers
+
+349
+00:25:46,500 --> 00:25:50,830
+Firefox, previously used in
+Mozilla, which was the original one -
+
+350
+00:25:50,830 --> 00:25:56,278
+And now we have Edge and
+Internet Explorer and whatnot, right?
+
+351
+00:25:56,278 --> 00:26:01,630
+So these are all clients. On
+the server side, you need a
+
+352
+00:26:01,630 --> 00:26:04,969
+Server, which you have never
+seen, but you can get it from
+
+353
+00:26:04,994 --> 00:26:09,250
+Microsoft or Apache and so forth.
+So there are many servers, right?
+
+354
+00:26:09,250 --> 00:26:15,400
+Free and paid. And a web
+page is basically a group of
+
+355
+00:26:15,400 --> 00:26:17,951
+objects, and they are
+called objects because
+
+356
+00:26:17,951 --> 00:26:24,180
+this could be voice, video, or text.
+
+357
+00:26:24,180 --> 00:26:28,607
+And the objects will be text,
+images, and files. URL is the locator,
+
+358
+00:26:28,632 --> 00:26:30,906
+uniform resource locator.
+
+359
+00:26:30,931 --> 00:26:35,878
+So for example, if I write down http://
+
+360
+00:26:35,878 --> 00:26:41,830
+www.cse.wustl.ed/~jain
+
+361
+00:26:41,830 --> 00:26:46,930
+/cse473-09/sample.htm, That's a URL.
+
+362
+00:26:46,930 --> 00:26:52,210
+You already knew that. Before,
+URL because you just swap in
+
+363
+00:26:52,210 --> 00:26:56,340
+is called Uniform Resource
+Locator It's called uniform because
+
+364
+00:26:56,340 --> 00:27:02,710
+This is uniform in the whole world, that's
+all it is. OK, it's the global standard.
+
+365
+00:27:07,930 --> 00:27:13,060
+Alright. And now, of course, the clients
+could be running any operating system.
+
+366
+00:27:13,060 --> 00:27:14,945
+There is a Mac,
+there is a PC and the
+
+367
+00:27:14,957 --> 00:27:17,203
+server could be running
+any operating system
+
+368
+00:27:17,203 --> 00:27:21,420
+and any server. This is a
+web server from Apache.
+
+369
+00:27:21,420 --> 00:27:27,328
+OK, so. Now HTTP uses TCP.
+
+370
+00:27:30,530 --> 00:27:33,290
+And actually. Yeah,
+
+371
+00:27:33,315 --> 00:27:39,180
+it uses TCP and it has two different...
+
+372
+00:27:39,180 --> 00:27:45,175
+Actually, it started out stateless.
+Stateless means the server does
+
+373
+00:27:45,175 --> 00:27:49,489
+not remember any previous
+history. What it means is that there are
+
+374
+00:27:49,489 --> 00:27:53,155
+millions of people coming to my
+server. And if I remember everybody, what
+
+375
+00:27:53,155 --> 00:27:56,890
+they're doing, what they're saying.
+Then I would have so much memory,
+
+376
+00:27:56,890 --> 00:28:01,190
+disk, and all that required to
+store all that. So this server doesn't
+
+377
+00:28:01,190 --> 00:28:06,455
+remember what you did,
+OK? And so you give the
+
+378
+00:28:06,455 --> 00:28:11,810
+question to the server, and
+the server answers that question.
+
+379
+00:28:11,810 --> 00:28:15,277
+Now, so for example, you ask the question
+
+380
+00:28:15,277 --> 00:28:20,906
+what is HTTP? And I
+say, that is hyper traffic -
+
+381
+00:28:20,906 --> 00:28:27,040
+and you say what if I add S? Now, I
+don't remember what to add that S to.
+
+382
+00:28:27,040 --> 00:28:31,030
+This is a new question. It's not complete.
+
+383
+00:28:34,620 --> 00:28:39,496
+Right, so every question
+has to be complete.
+
+384
+00:28:39,521 --> 00:28:41,522
+That is called
+stateless because I
+
+385
+00:28:41,522 --> 00:28:47,450
+don't remember your previous question.
+
+386
+00:28:47,450 --> 00:28:49,603
+And therefore the
+TCP connections are
+
+387
+00:28:49,615 --> 00:28:52,463
+non-persistent, which
+means that when you send me
+
+388
+00:28:52,463 --> 00:28:54,521
+the question, before
+sending the question, you
+
+389
+00:28:54,533 --> 00:28:56,780
+wanted to make sure that
+your question gets to me.
+
+390
+00:28:56,780 --> 00:29:00,068
+You set up a TCP
+connection. I gave you the
+
+391
+00:29:00,080 --> 00:29:03,530
+answer. We closed the
+connection, we're done.
+
+392
+00:29:03,530 --> 00:29:06,386
+Non-persistent means now, next question,
+
+393
+00:29:06,386 --> 00:29:13,080
+next TCP connection, next
+answer, done. Connection closed.
+
+394
+00:29:13,080 --> 00:29:16,802
+And so that was non-persistent,
+opens a new TCP connection, gets one
+
+395
+00:29:16,827 --> 00:29:23,436
+object and close. And that was
+very slow. That became very painful.
+
+396
+00:29:23,436 --> 00:29:28,247
+That was the original HTTP, right? So
+then they said OK, we will do persistence.
+
+397
+00:29:32,191 --> 00:29:33,968
+With persistence, you open one
+
+398
+00:29:33,968 --> 00:29:37,307
+connection and you can keep
+asking a few questions and then you
+
+399
+00:29:37,307 --> 00:29:40,520
+close the connection, and then you
+come back and you ask more questions.
+
+400
+00:29:40,520 --> 00:29:44,160
+So again we won't remember across
+the connections. After the connection,
+
+401
+00:29:44,160 --> 00:29:50,740
+Maybe I can remember. Right? So the server
+leaves the connection open after sending an
+
+402
+00:29:50,740 --> 00:29:53,906
+object and closes on timeout. And
+if you don't ask any more questions
+
+403
+00:29:53,906 --> 00:29:59,822
+it will close the connection.
+Right? So basically if a web page
+
+404
+00:29:59,822 --> 00:30:05,625
+comes in, and then you didn't
+click on any links on that web page,
+
+405
+00:30:05,625 --> 00:30:08,293
+then I don't know
+whether WashU will close
+
+406
+00:30:08,305 --> 00:30:11,173
+the connection. But if
+it was something which was
+
+407
+00:30:11,173 --> 00:30:14,670
+more of a paid site, like if
+you're buying your airline ticket,
+
+408
+00:30:14,670 --> 00:30:16,840
+they will just say sorry,
+you're timed out, done.
+
+409
+00:30:20,040 --> 00:30:24,360
+WashU doesn't care. They
+will close the connection,
+
+410
+00:30:24,360 --> 00:30:27,522
+You won't know it, but if you click it
+again they will open the connection again -
+
+411
+00:30:27,522 --> 00:30:31,950
+but every question has to be complete.
+
+412
+00:30:31,950 --> 00:30:37,817
+So the web pages are written in
+HTML. HyperText Markup Language.
+
+413
+00:30:37,842 --> 00:30:39,433
+So if you want to
+write a web page, which
+
+414
+00:30:39,458 --> 00:30:42,190
+many of you have. If
+not, we will write today.
+
+415
+00:30:42,190 --> 00:30:47,574
+It is written in a language, not in
+a protocol. HTTP is the protocol.
+
+416
+00:30:47,574 --> 00:30:49,958
+HTML is the language.
+
+417
+00:30:54,930 --> 00:30:59,152
+So here is my webpage. This webpage
+
+418
+00:30:59,152 --> 00:31:05,816
+contains my picture and
+my name. If you go to my
+
+419
+00:31:05,816 --> 00:31:10,920
+web page you will find a lot
+more than this, but this is simplest.
+
+420
+00:31:10,920 --> 00:31:13,720
+OK, to prepare this I
+had to write this code.
+
+421
+00:31:19,290 --> 00:31:26,228
+Alright? So HTML. In HTML, everything
+starts with <HTML>. So this one says <HTML>
+
+422
+00:31:26,228 --> 00:31:29,212
+inside this angle
+brackets. Then the header.
+
+423
+00:31:29,224 --> 00:31:32,220
+And the header starts
+with the word HEAD and
+
+424
+00:31:32,220 --> 00:31:34,239
+then ends with the word /HEAD.
+
+425
+00:31:38,610 --> 00:31:43,210
+OK, this will be a backslash. So
+basically HEAD and /HEAD and then BODY
+
+426
+00:31:43,210 --> 00:31:46,543
+This is the thing that will
+be shown here. And it says
+
+427
+00:31:46,555 --> 00:31:49,840
+that the first thing I want
+to show you is the image,
+
+428
+00:31:49,840 --> 00:31:56,700
+and its source is jain.jpg
+We show this guy, an image.
+
+429
+00:31:56,700 --> 00:31:59,953
+This image, which is in
+my computer, and then
+
+430
+00:31:59,965 --> 00:32:03,300
+they break, <BR>, and
+put the text "Raj Jain."
+
+431
+00:32:07,136 --> 00:32:09,465
+OK, and then that's the end of
+
+432
+00:32:09,490 --> 00:32:12,364
+the body and end of the page.
+
+433
+00:32:15,510 --> 00:32:18,850
+OK, how many of you have written HTML?
+
+434
+00:32:18,850 --> 00:32:22,001
+Alright, so this is all unnecessary,
+
+435
+00:32:22,001 --> 00:32:25,610
+so those of you who have done HTML,
+
+436
+00:32:25,610 --> 00:32:32,420
+please do. And then, if nothing else,
+write a similar program for yourself.
+
+437
+00:32:32,420 --> 00:32:35,498
+OK, with your own picture and in my...
+
+438
+00:32:35,498 --> 00:32:38,720
+I don't think I have in this in this class,
+
+439
+00:32:38,720 --> 00:32:41,800
+but my next class everybody has to write
+
+440
+00:32:41,800 --> 00:32:47,560
+their own web page, and if you are
+anybody, you are going to look for a job.
+
+441
+00:32:47,560 --> 00:32:52,060
+You have to prepare one web page because
+nowadays you don't send resumes by Mail.
+
+442
+00:32:52,060 --> 00:32:57,480
+You send them on GitHub or whatever
+place you can find free space. And put it.
+
+443
+00:33:01,660 --> 00:33:07,938
+Alright, so this is HTML.
+Now, back to the protocol.
+
+444
+00:33:07,938 --> 00:33:12,960
+Protocol is when you want to get a page,
+
+445
+00:33:12,960 --> 00:33:16,614
+you send a command, and HTTP is one of the
+
+446
+00:33:16,614 --> 00:33:22,720
+protocols which are written in
+English. In ASCII to be exact.
+
+447
+00:33:22,720 --> 00:33:25,614
+So it is not like 010101,
+if you want to read
+
+448
+00:33:25,626 --> 00:33:27,989
+HTTP messages,
+they are very difficult to
+
+449
+00:33:28,014 --> 00:33:34,220
+read because there are binary.
+OK, only computers can read them.
+
+450
+00:33:34,220 --> 00:33:39,870
+HTTP was designed so that humans
+can read it, and computers can read it.
+
+451
+00:33:39,870 --> 00:33:43,030
+In fact, it is probably more difficult
+for computers than for humans.
+
+452
+00:33:43,030 --> 00:33:51,044
+Humans probably can easily read
+GET. OK, so you send the word GET.
+
+453
+00:33:51,069 --> 00:33:55,420
+Followed by a space, followed
+by a backslash and then tilde,
+
+454
+00:33:55,420 --> 00:33:58,136
+jain, blah blah blah and then a
+
+455
+00:33:58,136 --> 00:34:02,900
+space and then HTTP/1.1.
+
+456
+00:34:02,900 --> 00:34:08,429
+So what we're saying is, please
+give me this thing using this protocol.
+
+457
+00:34:09,645 --> 00:34:15,685
+HTTP has many protocol versions,
+and 1.1 version is what I'm speaking,
+
+458
+00:34:15,710 --> 00:34:19,386
+So don't speak to me in
+whatever other versions you have.
+
+459
+00:34:21,540 --> 00:34:28,303
+OK. And the host on which you
+have to look for this is www.cse.edu.
+
+460
+00:34:28,303 --> 00:34:32,870
+So we have broken the URL into two parts.
+This is what is called the Directory.
+
+461
+00:34:32,870 --> 00:34:39,813
+Or the object, and this is the host.
+What you would have typed into Firefox or
+
+462
+00:34:39,813 --> 00:34:44,532
+you know whatever you are using,
+HTTP: blah blah blah and then www.cse
+
+463
+00:34:44,533 --> 00:34:50,409
+and then you had to put this ~jain
+right? Here they are broken into two parts.
+
+464
+00:34:50,409 --> 00:34:53,248
+The first part is the
+host, second part is
+
+465
+00:34:53,260 --> 00:34:56,377
+the object. And then
+I'm saying the connection
+
+466
+00:34:56,378 --> 00:35:01,068
+closes, meaning after you give it to me,
+you can close the connection. I am Mozilla.
+
+467
+00:35:04,580 --> 00:35:06,794
+OK, and Mozilla 4.0.
+
+468
+00:35:09,170 --> 00:35:15,430
+And I only speak EN, English.
+
+469
+00:35:15,430 --> 00:35:20,814
+OK, if you write Fr then you will
+get the answer in French, alright.
+
+470
+00:35:20,814 --> 00:35:26,110
+And so people write all their languages,
+whatever language. But I only need EN.
+
+471
+00:35:29,520 --> 00:35:31,772
+Alright, so these things are
+
+472
+00:35:31,772 --> 00:35:34,379
+in asking, the sense
+that you write this
+
+473
+00:35:34,391 --> 00:35:37,330
+carriage return, right?
+This carriage return,
+
+474
+00:35:37,330 --> 00:35:39,286
+This carriage return,
+write this carriage return,
+
+475
+00:35:39,298 --> 00:35:41,070
+write this carriage
+return, carriage return.
+
+476
+00:35:41,070 --> 00:35:46,660
+2 carriage returns.
+
+477
+00:35:46,660 --> 00:35:52,936
+Two carriage returns
+means I'm done. On my side.
+
+478
+00:35:54,420 --> 00:35:57,369
+Give me the answer.
+
+479
+00:36:01,718 --> 00:36:04,368
+Well, how do you negotiate
+which HTTP protocol to use?
+
+480
+00:36:04,394 --> 00:36:08,910
+Users decide what you can speak. There is
+no negotiation, the client is the winner.
+
+481
+00:36:13,950 --> 00:36:18,060
+Right? The server will say sorry, I don't
+speak it, and then you may not get it,
+
+482
+00:36:18,060 --> 00:36:24,282
+but you know, generally servers
+are smart. A lot more money is put into
+
+483
+00:36:24,282 --> 00:36:28,929
+keeping them up to date. Clients may
+not be updated for years. Yeah, go ahead.
+
+484
+00:36:37,936 --> 00:36:38,840
+Sorry?
+
+485
+00:36:42,649 --> 00:36:45,080
+Why is it not changed to binary?
+
+486
+00:36:45,080 --> 00:36:51,132
+Oh OK, well nowadays most newer
+protocols of HTTP are ASCII because we're
+
+487
+00:36:51,132 --> 00:36:54,420
+not in short of bits
+anymore. See, the original
+
+488
+00:36:54,432 --> 00:36:57,870
+protocols were written
+at 410 bits per second and
+
+489
+00:36:57,870 --> 00:37:04,471
+every bit was worth its money, and
+you will see those protocols where
+
+490
+00:37:04,471 --> 00:37:10,257
+they try to save every one bit. Here
+we have plenty of bits, so we don't care.
+
+491
+00:37:14,288 --> 00:37:16,165
+So nowadays, debugging is
+
+492
+00:37:16,165 --> 00:37:19,370
+more important than anything else,
+so you can debug this very quickly,
+
+493
+00:37:19,370 --> 00:37:21,944
+and if you suppose
+something is not working,
+
+494
+00:37:21,956 --> 00:37:24,198
+you can just look at
+the ASCII message
+
+495
+00:37:24,198 --> 00:37:28,109
+using anything and then even go:
+this tilde was not there, you know
+
+496
+00:37:28,109 --> 00:37:29,920
+you know, the message was not sent.
+
+497
+00:37:29,920 --> 00:37:32,118
+This is very easy to debug and write.
+
+498
+00:37:38,490 --> 00:37:41,474
+OK so don't go to HTTPS yet.
+
+499
+00:37:41,507 --> 00:37:44,317
+HTTPS is secure, which
+means there's a lot of security,
+
+500
+00:37:44,329 --> 00:37:46,999
+so I wouldn't cover it
+until the end of this course.
+
+501
+00:37:48,655 --> 00:37:50,137
+The last module is security.
+
+502
+00:37:53,740 --> 00:37:59,290
+Anything else? Right, so
+there are four things here,
+
+503
+00:37:59,290 --> 00:38:05,310
+The method - The method is GET.
+OK, there are other methods in a minute.
+
+504
+00:38:05,310 --> 00:38:12,260
+We will get them. URL.
+So this is the URL object
+
+505
+00:38:12,260 --> 00:38:16,328
+actually and this is the host, so
+
+506
+00:38:16,328 --> 00:38:22,079
+This is the object and then the version,
+this is the version, and the header fields,
+
+507
+00:38:22,104 --> 00:38:27,496
+and these are the fields: Host:,
+Connection:, User-agent:, Accept-Language:
+
+508
+00:38:27,520 --> 00:38:32,139
+So these are all the header fields, all
+the header fields are followed by a colon.
+
+509
+00:38:38,070 --> 00:38:42,865
+OK. Alright. Now.
+
+510
+00:38:42,865 --> 00:38:48,550
+This is the message format. Every
+message will start with a method,
+
+511
+00:38:48,550 --> 00:38:51,530
+a space, followed by URL.
+
+512
+00:38:51,530 --> 00:38:54,809
+A space followed by
+version, cr, lf, Followed
+
+513
+00:38:54,821 --> 00:38:58,327
+by header field name,
+followed by Colon followed
+
+514
+00:38:58,327 --> 00:39:02,273
+by value of that field. CRLF, CRLF, CRLF,
+
+515
+00:39:02,273 --> 00:39:06,528
+CRLF and then some text.
+
+516
+00:39:12,500 --> 00:39:18,920
+OK. Yeah. The CRLF...
+carriage return and line feed.
+
+517
+00:39:22,158 --> 00:39:26,133
+So those are the parts
+we do in the DOS days
+
+518
+00:39:26,158 --> 00:39:28,921
+we do it every second.
+
+519
+00:39:30,940 --> 00:39:35,991
+CRLF, carriage return and line feed
+
+520
+00:39:36,016 --> 00:39:41,510
+so the old typewriters had those fields
+
+521
+00:39:41,510 --> 00:39:48,280
+Old typewriters, old typewriters if
+you're typing, there was a key called CR,
+
+522
+00:39:48,305 --> 00:39:53,950
+carriage return, and if you press
+that, the carriage will come to this end
+
+523
+00:39:53,950 --> 00:39:58,280
+but it will not go down. Right, if
+you want to go to the next line.
+
+524
+00:39:58,280 --> 00:40:00,637
+You put the key LF.
+
+525
+00:40:02,150 --> 00:40:05,538
+Line feed. So, it will
+go to the next line, and if
+
+526
+00:40:05,550 --> 00:40:09,084
+you don't want to go to
+the return, you want to just
+
+527
+00:40:09,084 --> 00:40:11,314
+go here, right here to the
+next line, then you will say LF
+
+528
+00:40:11,326 --> 00:40:13,530
+and it will go down. That is
+how I typed my Ph.D. thesis.
+
+529
+00:40:13,530 --> 00:40:16,709
+If you want to write X raised to the
+one, you write 1 and then you come
+
+530
+00:40:16,709 --> 00:40:21,990
+down and write X. Alright, it
+was not like X underscore or
+
+531
+00:40:21,990 --> 00:40:26,650
+or whatever. I mean there was no -
+
+532
+00:40:26,650 --> 00:40:31,490
+The typewriter. Now that's CR LF.
+
+533
+00:40:40,839 --> 00:40:43,310
+CRLF is an in line character.
+
+534
+00:40:43,310 --> 00:40:46,420
+Actually, it's just
+control M and control L.
+
+535
+00:40:46,420 --> 00:40:50,983
+Control+M is I think 13 L is Ctrl+ML...LM
+
+536
+00:40:50,983 --> 00:40:56,510
+yeah, 13 and 10 in ASCII. Now this is this
+is beyond this course, but every character
+
+537
+00:40:56,510 --> 00:41:02,100
+has a number associated with it,
+and up to whatever number ASCII goes,
+
+538
+00:41:02,100 --> 00:41:05,470
+up to 128 or 255 or whatever I want.
+
+539
+00:41:05,470 --> 00:41:10,970
+So this CR is 13. LF is 10. Yeah.
+
+540
+00:41:15,203 --> 00:41:16,848
+OK, it doesn't matter.
+
+541
+00:41:16,873 --> 00:41:21,562
+CRLF is fixed, it is part of
+ASCII. I mean this is totally after
+
+542
+00:41:21,562 --> 00:41:25,484
+running to the operating system. ASCII
+messages can go from any computer
+
+543
+00:41:25,509 --> 00:41:29,330
+type to any computer type from any
+operating system to any operating system,
+
+544
+00:41:29,330 --> 00:41:31,391
+and so they have been
+standardized worldwide.
+
+545
+00:41:31,403 --> 00:41:33,070
+ASCII stands for
+American standards.
+
+546
+00:41:33,070 --> 00:41:37,142
+For something, something.
+So that is an American standard
+
+547
+00:41:37,142 --> 00:41:38,929
+and it became an
+international standard,
+
+548
+00:41:38,941 --> 00:41:40,915
+and now the international
+standard is called
+
+549
+00:41:40,915 --> 00:41:47,390
+something else and I forget the name.
+So basically. These are the standards
+
+550
+00:41:47,390 --> 00:41:52,845
+for character transmission.
+Right, and once you write
+
+551
+00:41:52,845 --> 00:41:57,181
+down, if you use something
+else, then you could put that in the
+
+552
+00:41:57,181 --> 00:41:58,889
+header field that I'm
+not using ASCII, I am
+
+553
+00:41:58,901 --> 00:42:00,660
+using something else,
+and then you use that.
+
+554
+00:42:03,780 --> 00:42:09,790
+Alright, so here is the
+message. This is the response.
+
+555
+00:42:09,790 --> 00:42:15,800
+So the response is HTTP 1.1, 200 OK
+
+556
+00:42:15,800 --> 00:42:21,560
+Connection: close. date: this
+month. Server:, Last modified:,
+
+557
+00:42:21,560 --> 00:42:27,510
+Content length: 6500, Content
+type: text/HTML, and then lots of data.
+
+558
+00:42:27,510 --> 00:42:31,062
+Now let me read one by one. So
+what this server is saying is that
+
+559
+00:42:31,062 --> 00:42:37,420
+I'm giving you the answer in 1.1, and
+200 means OK. So it answered twice.
+
+560
+00:42:37,420 --> 00:42:39,953
+200 for the computer to read.
+
+561
+00:42:39,965 --> 00:42:42,820
+OK for the human being to
+read. They are the same thing.
+
+562
+00:42:42,820 --> 00:42:48,380
+Whenever 200 comes, it is always followed by
+OK. Because we cannot remember the number.
+
+563
+00:42:48,380 --> 00:42:54,230
+The computer cannot read OK so easily.
+So the computer sees 200 and says OK,
+
+564
+00:42:54,230 --> 00:43:00,060
+I got it. Alright, and
+here are the numbers -
+
+565
+00:43:00,060 --> 00:43:04,450
+200 OK. 300 moves permanently.
+400 bad request. 404 not found.
+
+566
+00:43:04,450 --> 00:43:08,590
+505 HTTP version not supported. Yeah.
+
+567
+00:43:13,337 --> 00:43:14,333
+Move permanently, the question
+
+568
+00:43:14,333 --> 00:43:17,184
+is whether it will
+give you, It is optional.
+
+569
+00:43:17,209 --> 00:43:19,136
+It most likely will because that
+
+570
+00:43:19,161 --> 00:43:24,460
+is why it will say permanently.
+Otherwise, you will get a 404.
+
+571
+00:43:24,460 --> 00:43:28,735
+So in my system I manage a website,
+where those pages you might go through,
+
+572
+00:43:28,735 --> 00:43:35,056
+I have 70,000 pages. OK, it
+is bigger than any company.
+
+573
+00:43:35,056 --> 00:43:39,760
+I have to do all this, is that
+whenever I move a page
+
+574
+00:43:39,760 --> 00:43:43,047
+from here to there, I
+have to put a pointer at the
+
+575
+00:43:43,059 --> 00:43:46,164
+old place. That I'm
+moving it here, so you will
+
+576
+00:43:46,164 --> 00:43:49,680
+get the message saying that it has been
+moved, and it will give you the new one.
+
+577
+00:43:49,680 --> 00:43:52,830
+If I miss a page then you will get a 404.
+
+578
+00:44:04,988 --> 00:44:06,726
+How was it?
+
+579
+00:44:08,852 --> 00:44:10,818
+Oh, this was user agent.
+
+580
+00:44:23,770 --> 00:44:27,690
+You send this and then you get
+that. I'm sorry. What is your question?
+
+581
+00:44:38,293 --> 00:44:39,815
+Can somebody translate for me?
+
+582
+00:44:39,840 --> 00:44:41,618
+I mean I'm not getting it, yeah?
+
+583
+00:44:42,930 --> 00:44:48,170
+What is the user? Oh user agent?
+
+584
+00:44:48,170 --> 00:44:53,800
+OK, OK, OK, alright. So
+here's the thing. Here is the thing
+
+585
+00:44:53,800 --> 00:45:00,150
+So the question is good.
+Why Mozilla and why not Edge?
+
+586
+00:45:00,150 --> 00:45:06,950
+Somebody might do something special
+just for them. OK, for example in Google,
+
+587
+00:45:06,950 --> 00:45:11,910
+I'm not going to use this, and I'm going to
+use some extension they might come up with.
+
+588
+00:45:11,910 --> 00:45:15,671
+Then the web server
+will know who is causing
+
+589
+00:45:15,683 --> 00:45:18,870
+this trouble, and
+how to answer them.
+
+590
+00:45:18,870 --> 00:45:22,731
+And also they keep track of
+users, you can go to any website and
+
+591
+00:45:22,731 --> 00:45:25,520
+you can figure out how many
+people came to you from Windows,
+
+592
+00:45:25,520 --> 00:45:28,650
+how many people came to you
+from this browser, that browser?
+
+593
+00:45:28,650 --> 00:45:30,757
+Every browser has slight differences.
+
+594
+00:45:33,360 --> 00:45:38,400
+OK, did that answer your
+question? OK, go ahead.
+
+595
+00:45:45,200 --> 00:45:48,990
+Would they still answer? The messages
+that are requested not specified?
+
+596
+00:45:56,715 --> 00:45:58,990
+Yeah yeah, so the thing is,
+
+597
+00:45:58,990 --> 00:46:04,580
+most of these header fields are
+
+598
+00:46:04,580 --> 00:46:10,990
+not required. OK, but you
+need to... see this next slide?
+
+599
+00:46:10,990 --> 00:46:16,240
+You need the method, URL, and version.
+
+600
+00:46:16,240 --> 00:46:20,642
+And there could be more of these. I just
+showed you some. I mean there are tons of
+
+601
+00:46:20,642 --> 00:46:26,880
+others that are not here. There are more
+
+602
+00:46:26,880 --> 00:46:31,372
+optional arguments, yeah. So now
+
+603
+00:46:31,372 --> 00:46:37,080
+this is a response and it
+has similar header fields.
+
+604
+00:46:37,080 --> 00:46:40,398
+Actually, the next slide
+showed you the same thing,
+
+605
+00:46:40,410 --> 00:46:43,740
+version... the response
+starts with version, space,
+
+606
+00:46:43,740 --> 00:46:48,650
+Status code, space, phrase,
+CRLF. header field name,
+
+607
+00:46:48,650 --> 00:46:55,330
+colon, space, value, CRLF, CRLF,
+and so on. So going back to this.
+
+608
+00:46:55,330 --> 00:46:59,960
+It says I'm closing the
+connection. This is the time today.
+
+609
+00:46:59,960 --> 00:47:05,372
+And this is the server. Why is it
+servicing the WashU server? You know,
+
+610
+00:47:05,372 --> 00:47:07,663
+you know that it is not
+Microsoft and therefore
+
+611
+00:47:07,675 --> 00:47:10,170
+you cannot read Microsoft
+extensions with me, yeah?
+
+612
+00:47:13,618 --> 00:47:15,610
+Yeah, this is another system connection.
+
+613
+00:47:15,610 --> 00:47:20,950
+Yeah, and then the object that I'm
+sending you was last modified in 2009.
+
+614
+00:47:25,410 --> 00:47:30,804
+OK, and its length is
+6500 and it is a text.
+
+615
+00:47:33,220 --> 00:47:37,341
+OK, and then whatever
+else is there. Video, yeah.
+
+616
+00:47:39,840 --> 00:47:40,742
+Byte, yeah.
+
+617
+00:47:51,260 --> 00:47:53,453
+So most of these are
+standardized now. Microsoft
+
+618
+00:47:53,465 --> 00:47:55,580
+might have put some
+things I don't know about,
+
+619
+00:47:55,580 --> 00:47:57,584
+but most of these are standardized.
+
+620
+00:48:00,610 --> 00:48:06,091
+So that is where you need the HTTP
+RFC. So what you have to do is you can
+
+621
+00:48:06,091 --> 00:48:10,408
+download the HTTP protocol RFC
+from ITF. It tells you all the fields, all
+
+622
+00:48:10,408 --> 00:48:13,353
+the header fields,
+everything, all the rules, and
+
+623
+00:48:13,365 --> 00:48:16,440
+when people implement it,
+they read that RFC. Yeah.
+
+624
+00:48:21,760 --> 00:48:27,120
+Yeah, that is standardized
+by RFC, by by ITF.
+
+625
+00:48:27,120 --> 00:48:32,028
+Yeah, these codes have been standardized
+by ITF. These are standard codes.
+
+626
+00:48:32,028 --> 00:48:37,908
+Is that the question? Oh, what is
+a bad request? Because you put
+
+627
+00:48:37,908 --> 00:48:43,142
+something that I couldn't understand. I
+mean, let's say instead of GET you said GTE
+
+628
+00:48:43,142 --> 00:48:47,880
+I don't know what GTE is.
+
+629
+00:48:47,880 --> 00:48:52,630
+It's a bad request, yeah? Yeah.
+
+630
+00:49:03,890 --> 00:49:06,698
+Yeah, it's up to the
+server. It's up to the server.
+
+631
+00:49:06,710 --> 00:49:09,530
+I mean the thing is, some
+servers will take the old
+
+632
+00:49:09,530 --> 00:49:14,490
+versions, very very old versions, and
+some will say no more than five years old.
+
+633
+00:49:14,490 --> 00:49:19,799
+Except this server.
+
+634
+00:49:24,400 --> 00:49:29,710
+OK. Alright, so this I
+already went through,
+
+635
+00:49:29,710 --> 00:49:36,230
+so the next is something that you
+would do yourself, and you can do it.
+
+636
+00:49:36,230 --> 00:49:42,940
+By typing on your computer on a DOS box.
+
+637
+00:49:42,940 --> 00:49:46,113
+Telnet might not work
+because nowadays telnet
+
+638
+00:49:46,125 --> 00:49:49,448
+has a bad reputation,
+so it was working at some
+
+639
+00:49:49,448 --> 00:49:53,298
+time but may not
+work now. But basically,
+
+640
+00:49:53,310 --> 00:49:57,448
+you can set telnet to
+www1.cse.wustl.edu 80.
+
+641
+00:49:57,790 --> 00:50:03,070
+What it says is that I want to
+connect to port 80 of this one.
+
+642
+00:50:03,070 --> 00:50:05,993
+Tell me the protocol that
+will connect you to that
+
+643
+00:50:06,005 --> 00:50:08,710
+port. Now, once you're
+connected to that port,
+
+644
+00:50:08,710 --> 00:50:14,857
+then you can type GET this host.
+Carriage return and carriage return
+
+645
+00:50:14,882 --> 00:50:16,670
+And now you see, this
+is a good example of
+
+646
+00:50:16,682 --> 00:50:18,692
+what people had asked.
+What about other fields?
+
+647
+00:50:18,692 --> 00:50:20,809
+I don't need the
+other field. I don't care
+
+648
+00:50:20,821 --> 00:50:23,050
+for the language, I
+don't care for anything.
+
+649
+00:50:23,050 --> 00:50:27,945
+Connection TCP close, nothing.
+So this carriage return carriage
+
+650
+00:50:27,945 --> 00:50:30,149
+return means that I'm done.
+
+651
+00:50:32,780 --> 00:50:36,010
+OK. Now if it is a server over there,
+
+652
+00:50:36,010 --> 00:50:42,364
+it will say HTTP 1.1, 200 OK date.
+Server, Accept content, language, and then
+
+653
+00:50:42,364 --> 00:50:48,314
+it will send you this text, it will
+say. Left angle bracket HTML,
+
+654
+00:50:48,314 --> 00:50:54,064
+right angle bracket and then return
+and then <head> and </head> and then
+
+655
+00:50:54,064 --> 00:50:57,088
+<body>and "this is a sample
+text"  </body></HTML>. But these
+
+656
+00:50:57,100 --> 00:50:59,290
+characters will come
+back to your computer.
+
+657
+00:50:59,290 --> 00:51:02,499
+Now your browser will change that to this.
+
+658
+00:51:05,260 --> 00:51:08,514
+What you will see is,
+this is a sample text.
+
+659
+00:51:10,980 --> 00:51:16,960
+Because this is HTML.
+That HTML got translated
+
+660
+00:51:16,960 --> 00:51:19,912
+to this page on your screen.
+
+661
+00:51:19,912 --> 00:51:24,790
+So now you see the role for HTML and HTTP.
+
+662
+00:51:24,790 --> 00:51:29,170
+HTTP is required to talk.
+HTML is required to present.
+
+663
+00:51:34,070 --> 00:51:37,075
+Any questions? And
+everything comes
+
+664
+00:51:37,087 --> 00:51:40,942
+character by character,
+so the last character
+
+665
+00:51:40,942 --> 00:51:42,378
+in this angle bracket - Yea, go ahead.
+
+666
+00:51:47,090 --> 00:51:52,290
+Yeah, and this was right here where it
+says Entity Body. Or in the previous one.
+
+667
+00:51:52,290 --> 00:51:53,584
+It says entity body.
+
+668
+00:52:07,590 --> 00:52:13,165
+So this 233 you can
+calculate right from here.
+
+669
+00:52:13,190 --> 00:52:16,703
+1, 2, 3, 4, 5, Amazon, so forth.
+You will get 233 characters.
+
+670
+00:52:33,050 --> 00:52:35,723
+Please. Yeah.
+
+671
+00:52:42,920 --> 00:52:48,660
+OK, the question is content-type,
+is this a common example?
+
+672
+00:52:48,660 --> 00:52:54,866
+Or a random example? This is one of
+the most common ones, and let me put
+
+673
+00:52:54,866 --> 00:52:58,520
+it this way because originally,
+the pages used to be just the text.
+
+674
+00:52:58,520 --> 00:53:01,202
+Nowadays there are
+very few pages, just plain
+
+675
+00:53:01,214 --> 00:53:03,790
+text alone. Right, so
+they might have sound
+
+676
+00:53:03,790 --> 00:53:07,511
+they might have, you know? So what
+will happen is I'm going to come to you
+
+677
+00:53:07,511 --> 00:53:10,731
+Now you might get many
+different contents. OK, so
+
+678
+00:53:10,743 --> 00:53:14,040
+there could be sound or
+something like that right?
+
+679
+00:53:14,040 --> 00:53:20,120
+And the sound is coded with some method.
+So MIMO, encoding will come later on.
+
+680
+00:53:20,120 --> 00:53:21,960
+So this could be different. Yeah, go ahead.
+
+681
+00:53:26,450 --> 00:53:30,720
+Right, it could be something else.
+
+682
+00:53:30,720 --> 00:53:36,690
+So there are many different content
+types. Again, this is standardized by ITF.
+
+683
+00:53:36,690 --> 00:53:40,500
+What type it is. Any other questions?
+
+684
+00:53:40,500 --> 00:53:42,920
+Alright, so there is
+your homework. Actually,
+
+685
+00:53:42,932 --> 00:53:45,100
+one more hands-on
+and then the homework,
+
+686
+00:53:45,100 --> 00:53:48,350
+so listen carefully. So here.
+
+687
+00:53:48,350 --> 00:53:51,480
+You said get this one.
+
+688
+00:53:51,480 --> 00:53:57,291
+And then the answer comes
+back. And this is the answer.
+
+689
+00:54:00,622 --> 00:54:02,474
+OK, so you see a list
+
+690
+00:54:02,474 --> 00:54:04,455
+starts with 404 not found.
+
+691
+00:54:08,130 --> 00:54:13,940
+OK, but then it also sent this
+part, and this server made this up.
+
+692
+00:54:13,940 --> 00:54:18,622
+So on your screen you will get "not
+found" because it was set there, and then
+
+693
+00:54:18,622 --> 00:54:23,015
+actually it said here, not found.
+That's why it's bold, and then it will say
+
+694
+00:54:23,015 --> 00:54:27,460
+the requested sample was not found
+on this server, and it says I'm this guy.
+
+695
+00:54:27,460 --> 00:54:29,593
+So whatever they want
+to say, this server might
+
+696
+00:54:29,605 --> 00:54:31,750
+say there, right? So you
+got the error message.
+
+697
+00:54:38,681 --> 00:54:39,620
+This one?
+
+698
+00:54:44,872 --> 00:54:46,210
+This output.
+
+699
+00:54:51,824 --> 00:54:53,011
+DOCTYPE HTML -
+
+700
+00:54:53,036 --> 00:54:58,342
+So here's the thing. This
+server decided that it wants
+
+701
+00:54:58,342 --> 00:55:02,765
+to put before HTML, this thing.
+And there are lines before HTML.
+
+702
+00:55:04,650 --> 00:55:09,590
+OK, because nowadays
+we don't just speak HTML.
+
+703
+00:55:09,590 --> 00:55:15,031
+We speak many other markup
+languages. XML is more common. Right,
+
+704
+00:55:15,031 --> 00:55:19,310
+Basically I mean,
+
+705
+00:55:19,310 --> 00:55:25,550
+this came from the
+server, and this is valid...
+
+706
+00:55:37,140 --> 00:55:41,940
+OK, the server was decided
+right here, www1.cse.wustl.edu.
+
+707
+00:55:45,981 --> 00:55:47,290
+Yeah, then it will not go anywhere.
+
+708
+00:55:47,290 --> 00:55:51,224
+You will get "host not found."
+
+709
+00:55:54,938 --> 00:55:57,863
+Now here what happened
+was that zero doesn't exist.
+
+710
+00:55:58,974 --> 00:56:04,176
+The previous one was some other
+number that probably existed right?
+
+711
+00:56:04,201 --> 00:56:09,186
+So this is what it is. Is that
+depending upon you know what you
+
+712
+00:56:09,186 --> 00:56:13,510
+request, what the answer comes
+back, the answer comes back in HTML.
+
+713
+00:56:13,510 --> 00:56:20,600
+And. Then you see it on your screen.
+
+714
+00:56:20,600 --> 00:56:27,430
+Cookies. We are going
+very slow. Alright, so the
+
+715
+00:56:27,430 --> 00:56:33,810
+problem with HTML was that
+we couldn't remember the next or
+
+716
+00:56:33,810 --> 00:56:37,460
+previous question, right? There
+are stateless, so what do we do?
+
+717
+00:56:37,460 --> 00:56:43,431
+So what they did was they said
+OK, Alright, I will remember you. I will
+
+718
+00:56:43,431 --> 00:56:47,277
+give you a number which, when you ask the
+
+719
+00:56:47,277 --> 00:56:50,194
+next question please give
+me that number, so I will
+
+720
+00:56:50,206 --> 00:56:52,910
+go back to my disk and
+figure out what number -
+
+721
+00:56:52,910 --> 00:56:58,170
+What you did before. Everybody gets
+a number. And that is called a cookie.
+
+722
+00:57:02,250 --> 00:57:07,430
+OK. And so. You go to.
+
+723
+00:57:07,430 --> 00:57:10,058
+In your computer,
+all these cookies are
+
+724
+00:57:10,070 --> 00:57:13,370
+remembered from the
+last time you talked to eBay.
+
+725
+00:57:13,370 --> 00:57:20,370
+It gave you the number 8734.
+So you go to the message. And.
+
+726
+00:57:31,311 --> 00:57:33,027
+OK, I think this would be the eBay server,
+
+727
+00:57:33,027 --> 00:57:35,967
+but we will come back
+to that. It should be eBay
+
+728
+00:57:35,979 --> 00:57:38,750
+Server. So you go back
+and send this message.
+
+729
+00:57:38,750 --> 00:57:43,238
+And it will say OK, I hear your answer.
+
+730
+00:57:43,238 --> 00:57:45,907
+But next time give me the number 1678.
+
+731
+00:57:48,620 --> 00:57:54,173
+OK, so this says here is my cookie, 1678
+and then it will give you the answer and
+
+732
+00:57:54,198 --> 00:57:59,620
+then the next one is 1678, still
+1678, and the response is done.
+
+733
+00:57:59,620 --> 00:58:03,760
+OK, so basically it is a contact. This is
+how it would remember what you are doing.
+
+734
+00:58:03,760 --> 00:58:10,387
+You are buying refrigerators.
+Write X, it remembers that in its disk,
+
+735
+00:58:10,387 --> 00:58:15,660
+you don't have to say the whole thing all
+over again. You can just give a number.
+
+736
+00:58:15,660 --> 00:58:20,260
+Go ahead with your question.
+
+737
+00:58:20,260 --> 00:58:25,358
+OK, this is the eBay server.
+Yeah, I think that was a typo.
+
+738
+00:58:25,358 --> 00:58:31,220
+Hey, can you take, set
+up the slides, write it down?
+
+739
+00:58:31,220 --> 00:58:33,507
+Just give it back to me, we can correct it.
+
+740
+00:58:41,171 --> 00:58:42,810
+Yeah, you have to get Amazon's cookie.
+
+741
+00:58:42,810 --> 00:58:47,890
+I mean I think what happened
+here is some part of it came from the
+
+742
+00:58:47,890 --> 00:58:49,658
+book and some part I created.
+
+743
+00:59:07,666 --> 00:59:13,040
+or this is Amazon's 1678. Yeah,
+so the thing is here you want -
+
+744
+00:59:13,040 --> 00:59:16,730
+OK, so you're right.
+Basically, this is Amazon's -
+
+745
+00:59:16,730 --> 00:59:22,850
+So what this is showing is,
+The cookie file is very long,
+
+746
+00:59:22,850 --> 00:59:25,155
+in some cases it is a
+file, in some cases it is just
+
+747
+00:59:25,180 --> 00:59:29,136
+an entry in a storage
+directory. So there is one entry
+
+748
+00:59:29,136 --> 00:59:35,440
+that says 8734, but we're not
+using it. We're talking to Amazon.
+
+749
+00:59:35,440 --> 00:59:37,960
+So we don't have any cookie.
+
+750
+00:59:37,960 --> 00:59:43,240
+Right, and then Amazon
+gives the cookie 1678.
+
+751
+00:59:43,240 --> 00:59:49,840
+So now we use that for
+Amazon, but 8734 doesn't change.
+
+752
+00:59:49,840 --> 00:59:50,542
+Yeah.
+
+753
+00:59:54,240 --> 00:59:57,302
+OK, the question is: do
+we have just a number? No.
+
+754
+00:59:57,327 --> 00:59:59,910
+So cookies started with numbers.
+
+755
+00:59:59,910 --> 01:00:03,930
+Now they have become so big.
+
+756
+01:00:03,930 --> 01:00:09,410
+They are very complex. OK,
+but the concept is the same.
+
+757
+01:00:13,463 --> 01:00:16,541
+From each website.
+
+758
+01:00:16,566 --> 01:00:21,818
+I think it is very confusing if you
+have multiple cookies from each host.
+
+759
+01:00:21,818 --> 01:00:28,618
+I mean you could have WW1 one cookie, WW2
+second cookie, but if you had W1 5 cookies,
+
+760
+01:00:28,618 --> 01:00:32,125
+that would be very confusing.
+You have to send the cookie back.
+
+761
+01:00:38,452 --> 01:00:40,880
+Yeah, right, so they are becoming large for
+
+762
+01:00:40,880 --> 01:00:44,518
+security reasons, not for anything else.
+So the thing is, there is a lot of security
+
+763
+01:00:44,518 --> 01:00:48,010
+information because here is the thing:
+when you go to the bank and it says sorry,
+
+764
+01:00:48,010 --> 01:00:53,270
+we don't recognize you, it's because you
+didn't have a cookie. If you had a cookie,
+
+765
+01:00:53,270 --> 01:00:55,658
+they will recognize you and then
+they will ask for your password.
+
+766
+01:01:02,782 --> 01:01:04,738
+Well, that's what it does, it's
+
+767
+01:01:04,738 --> 01:01:07,079
+not the holistic history
+you put in the cookie.
+
+768
+01:01:07,091 --> 01:01:09,640
+You could put it, but then
+you know it is too much.
+
+769
+01:01:09,640 --> 01:01:13,723
+The cookie is used only to give back to
+
+770
+01:01:13,723 --> 01:01:17,740
+the context, and in general,
+it's more for in recognizing
+
+771
+01:01:17,740 --> 01:01:21,390
+that you have been here before,
+that you are not a new computer
+
+772
+01:01:21,390 --> 01:01:25,930
+trying to reach my bank. OK. Yeah.
+
+773
+01:01:30,970 --> 01:01:34,666
+What is the breakdown of information
+for the server versus the client?
+
+774
+01:01:34,698 --> 01:01:37,205
+The client returns the cookies
+
+775
+01:01:37,230 --> 01:01:38,904
+and the server supplies the cookies.
+
+776
+01:01:42,315 --> 01:01:45,031
+And the cookie has to be
+stored on the client side, yeah.
+
+777
+01:01:45,056 --> 01:01:50,250
+Alright. So.
+
+778
+01:01:50,250 --> 01:01:53,400
+So everybody understands cookies now,
+
+779
+01:01:53,400 --> 01:01:54,871
+so I'm not going to talk
+about cookies anymore. It's
+
+780
+01:01:54,896 --> 01:01:57,370
+this totally new concept
+called a Proxy Server.
+
+781
+01:01:57,370 --> 01:02:01,840
+Now it so happens that most of the
+people are doing exactly the same thing.
+
+782
+01:02:01,840 --> 01:02:04,380
+OK, if the news comes
+out that somebody is, you
+
+783
+01:02:04,392 --> 01:02:06,890
+know whatever is
+happening in the world today.
+
+784
+01:02:06,890 --> 01:02:10,148
+Not much is happening today
+in the world. Everybody is just
+
+785
+01:02:10,148 --> 01:02:12,532
+talking about one thing,
+right. I'm not going to
+
+786
+01:02:12,544 --> 01:02:15,136
+talk about that thing. So
+the thing is, if everybody
+
+787
+01:02:15,136 --> 01:02:20,664
+talks about one thing, then why do 1500
+people have to go to the server and find
+
+788
+01:02:20,664 --> 01:02:27,563
+out when we can locally
+cache it. What they do is,
+
+789
+01:02:27,563 --> 01:02:31,608
+WashU, for example, to save its
+traffic would put a server here, which is
+
+790
+01:02:31,608 --> 01:02:34,206
+called a proxy server,
+which is not a real server.
+
+791
+01:02:34,218 --> 01:02:36,880
+When anybody wants to
+know about that common thing,
+
+792
+01:02:36,880 --> 01:02:42,650
+it has the answer already. It will give you
+the answer. If we didn't have the answer,
+
+793
+01:02:42,650 --> 01:02:48,190
+then we'll go to the original server and
+get the answer and then remember it.
+
+794
+01:02:48,190 --> 01:02:53,450
+For example, you want to know what
+is the score of whatever our team is.
+
+795
+01:02:53,450 --> 01:02:55,338
+Right, why do we have to
+go to the original server?
+
+796
+01:02:55,350 --> 01:02:57,140
+We can just know the
+score when one person asks,
+
+797
+01:02:57,140 --> 01:03:00,990
+second person asks, third person
+asks, we have the answer. Yeah.
+
+798
+01:03:03,953 --> 01:03:06,710
+Great. How do you know
+that it has not been updated?
+
+799
+01:03:06,710 --> 01:03:08,880
+Everything comes with
+a lifetime and everything
+
+800
+01:03:08,905 --> 01:03:11,996
+comes with the last
+modified. That's a good one.
+
+801
+01:03:11,996 --> 01:03:18,272
+So here we saw the lifetime somewhere,
+last modified was there somewhere, right?
+
+802
+01:03:18,272 --> 01:03:22,742
+Last modified. So last modified
+means that this field that you are getting
+
+803
+01:03:22,767 --> 01:03:28,590
+was last changed 10 years ago. Right, and
+it will give a lifetime with another field,
+
+804
+01:03:28,590 --> 01:03:33,890
+which says lifetime 10 seconds. So if you
+have to answer this again 10 seconds later,
+
+805
+01:03:33,890 --> 01:03:38,340
+please check again. If you want
+the stock market price of IBM stock,
+
+806
+01:03:38,340 --> 01:03:40,166
+it will have a lifetime of a second.
+
+807
+01:03:45,100 --> 01:03:47,976
+OK. And if you want
+the length of the United
+
+808
+01:03:47,988 --> 01:03:50,490
+States, all bits of
+the United States,
+
+809
+01:03:50,490 --> 01:03:52,811
+that area of the United
+States will have a lifetime
+
+810
+01:03:52,836 --> 01:03:56,450
+of 200 years. I don't know.
+Maybe at least a year.
+
+811
+01:03:56,450 --> 01:03:59,006
+OK, depending upon the climate change.
+
+812
+01:04:05,080 --> 01:04:09,828
+Right, you got it? OK. Proxy servers.
+
+813
+01:04:09,853 --> 01:04:12,389
+Proxy server is your local cache.
+
+814
+01:04:13,510 --> 01:04:19,103
+So you can get a conditional
+GET. Conditional GET is
+
+815
+01:04:19,103 --> 01:04:23,023
+Basically, you can say to
+this server, please give me this
+
+816
+01:04:23,048 --> 01:04:26,256
+object if modified since.
+If it has been modified
+
+817
+01:04:26,268 --> 01:04:29,230
+in the last three days,
+please give it to me.
+
+818
+01:04:29,230 --> 01:04:30,960
+Otherwise, I have it.
+
+819
+01:04:33,802 --> 01:04:35,110
+Alright, and you can send
+
+820
+01:04:35,135 --> 01:04:38,117
+lots of this modified
+since request, hundreds
+
+821
+01:04:38,129 --> 01:04:40,639
+of them, and maybe
+two will come back.
+
+822
+01:04:40,639 --> 01:04:42,770
+Everything else is fine.
+
+823
+01:04:47,030 --> 01:04:52,056
+Alright, so I get not modified,
+not modified 304, and then
+
+824
+01:04:52,056 --> 01:04:55,226
+if it has been modified you
+will get the modified data.
+
+825
+01:04:58,404 --> 01:05:00,886
+So that brings us to the end of HTTP.
+
+826
+01:05:04,080 --> 01:05:09,630
+HTTP summary has 6 things
+here. We have client server protocol,
+
+827
+01:05:09,630 --> 01:05:13,828
+First of all, it is not peer-to-peer, there
+is a server, there is a client and it uses
+
+828
+01:05:13,853 --> 01:05:20,830
+ASCII-based messages. Web
+pages are generally written in HTML.
+
+829
+01:05:20,830 --> 01:05:23,870
+The language is HTML, and
+it is either a non-persistent
+
+830
+01:05:23,882 --> 01:05:26,280
+or persistent connection.
+And cookies allow
+
+831
+01:05:26,280 --> 01:05:30,820
+servers to maintain these states.
+That's why the cookies were introduced.
+
+832
+01:05:30,820 --> 01:05:35,880
+Proxy servers improved performance
+by caching the frequently used pages.
+
+833
+01:05:35,880 --> 01:05:40,194
+Conditional GETs allows proxy
+servers to reduce the Internet traffic,
+
+834
+01:05:40,194 --> 01:05:44,006
+so the conditional get was introduced
+so that the proxy servers don't
+
+835
+01:05:44,006 --> 01:05:45,912
+have to get everything every time.
+
+836
+01:05:48,310 --> 01:05:54,780
+There is homework, 2A: HTTP
+
+837
+01:05:54,780 --> 01:05:57,756
+So here is the response from the
+
+838
+01:05:57,756 --> 01:06:04,550
+server, just the response. And...
+
+839
+01:06:04,550 --> 01:06:07,398
+And here's the answer. Basically,
+the response continued up to here,
+
+840
+01:06:07,423 --> 01:06:10,444
+and these are the 5
+questions. Was this
+
+841
+01:06:10,456 --> 01:06:13,600
+server able to successfully
+find the document?
+
+842
+01:06:13,600 --> 01:06:16,259
+When was the document
+last modified? How many
+
+843
+01:06:16,271 --> 01:06:19,000
+bytes are there? What
+are the last five bytes?
+
+844
+01:06:19,000 --> 01:06:23,540
+And just assume that
+the byte ends right here.
+
+845
+01:06:28,440 --> 01:06:30,670
+I'm sorry, what are you saying?
+
+846
+01:06:30,670 --> 01:06:38,195
+E-tag, yeah, that could be a cookie.
+OK, so anyway, what are the first 5
+
+847
+01:06:38,220 --> 01:06:40,621
+bytes of the document being
+returned? The first 5 bytes are
+
+848
+01:06:40,646 --> 01:06:46,246
+right here. And it's angle
+bracket to angle bracket, OK?
+
+849
+01:06:46,271 --> 01:06:49,240
+And did this server agree
+to a persistent connection?
+
+850
+01:06:49,240 --> 01:06:53,230
+So that is what you will see. Whether
+it was persistent and non-persistent.
+
+851
+01:06:53,230 --> 01:06:59,160
+I'm not going to give you the answer, but
+the answer is right there in front of you.
+
+852
+01:06:59,160 --> 01:07:04,290
+OK, and there's a lab.
+
+853
+01:07:04,290 --> 01:07:06,980
+The lab is, you have
+to find the IP address.
+
+854
+01:07:06,980 --> 01:07:11,300
+I think you did this last time, did you?
+
+855
+01:07:11,300 --> 01:07:17,778
+OK, so now this is slightly
+modified. So I think this is a
+
+856
+01:07:17,778 --> 01:07:20,053
+little bit ahead of time,
+but let me just explain
+
+857
+01:07:20,078 --> 01:07:22,806
+this lab. This needs
+explanation. We have time.
+
+858
+01:07:22,831 --> 01:07:28,140
+So the thing is, how
+is the name translated to an address?
+
+859
+01:07:28,140 --> 01:07:33,662
+The very first thing is that your
+computer has a file in which names
+
+860
+01:07:33,687 --> 01:07:42,397
+and addresses are written
+down. It's called the host file.
+
+861
+01:07:42,422 --> 01:07:45,738
+So if there is a host file and in that
+
+862
+01:07:45,763 --> 01:07:51,930
+it says www.google.com becomes
+this, then that's the answer, that's done.
+
+863
+01:07:51,930 --> 01:07:53,866
+If it is not found in
+the host file, then
+
+864
+01:07:53,891 --> 01:07:57,490
+there's a name server
+to whom we go and ask.
+
+865
+01:07:57,490 --> 01:07:59,615
+And if that name server
+has the answer, will give
+
+866
+01:07:59,627 --> 01:08:01,678
+it to you. If they don't
+have it then they will
+
+867
+01:08:01,678 --> 01:08:04,167
+ask their own server,
+so it could go on
+
+868
+01:08:04,179 --> 01:08:07,055
+forever, right? But here
+we are assuming that
+
+869
+01:08:07,055 --> 01:08:11,540
+it is on your host file. Alright.
+
+870
+01:08:11,540 --> 01:08:13,995
+So modify the host file to map
+
+871
+01:08:14,020 --> 01:08:21,160
+www.google.com to map to Yahoo's IP
+address. And then ping to google.com.
+
+872
+01:08:21,160 --> 01:08:23,619
+Notice that this is
+pinging too. And the host
+
+873
+01:08:23,631 --> 01:08:26,210
+file is located here,
+and I don't know for Mac.
+
+874
+01:08:26,210 --> 01:08:31,260
+I'm sorry I've never had a Mac,
+but in Windows, it is at this location.
+
+875
+01:08:31,260 --> 01:08:35,577
+Windows\System32\drivers\etc\hosts.
+And somebody
+
+876
+01:08:35,602 --> 01:08:38,229
+can just tell me where
+the file is for Mac
+
+877
+01:08:38,229 --> 01:08:41,094
+and I can just put this on this slide.
+Do you know where it is on the Mac?
+
+878
+01:08:41,127 --> 01:08:42,327
+ The host file?
+
+879
+01:08:48,910 --> 01:08:52,678
+OK anyway, just try and find it. Then
+we can put it. Yeah, next question, yeah.
+
+880
+01:08:57,229 --> 01:08:59,419
+Yeah, so finding the
+address is a very easy thing.
+
+881
+01:08:59,420 --> 01:09:01,203
+You already did that lab before, right?
+
+882
+01:09:08,335 --> 01:09:10,109
+Well, I mean here is the thing. OK.
+
+883
+01:09:10,109 --> 01:09:15,339
+So you got the point taken off? No, no
+no, it's OK. I wouldn't take out the point.
+
+884
+01:09:15,340 --> 01:09:18,352
+I mean, The thing is,
+if you got IPV6, I've got
+
+885
+01:09:18,364 --> 01:09:21,452
+IPV6. I mean, this is not
+wrong. Yeah, go ahead.
+
+886
+01:09:21,452 --> 01:09:25,770
+What was the question?
+Yeah, any IP version is fine.
+
+887
+01:09:25,770 --> 01:09:30,659
+Alright, so the thing is,
+
+888
+01:09:30,660 --> 01:09:33,857
+So you find google.com
+and you find yahoo.com, both
+
+889
+01:09:33,869 --> 01:09:37,174
+addresses you have to
+find, and then put in the
+
+890
+01:09:37,199 --> 01:09:42,219
+host file that google.com translates
+to this address and see if it will do that.
+
+891
+01:09:42,220 --> 01:09:45,264
+Now here is the thing.
+There's a slight problem with
+
+892
+01:09:45,276 --> 01:09:48,101
+this lab, and it might be
+the case that nowadays
+
+893
+01:09:48,102 --> 01:09:52,464
+the browsers have become very,
+very clever and they will see that this
+
+894
+01:09:52,464 --> 01:09:55,549
+something is wrong with
+this guy's computer. It is
+
+895
+01:09:55,561 --> 01:09:58,840
+not google.com and it
+will just crash it right there.
+
+896
+01:09:58,840 --> 01:10:02,291
+It will say no no no. Sorry, you are wrong.
+But in the previous cases, we just used
+
+897
+01:10:02,291 --> 01:10:04,089
+to go wherever you
+wanted to go, so let's see
+
+898
+01:10:04,114 --> 01:10:06,886
+how it handles. But
+then you find the domain
+
+899
+01:10:06,886 --> 01:10:09,925
+name and country. So that's another
+thing is that you have to find the domain
+
+900
+01:10:09,925 --> 01:10:13,796
+name of this. Given any address, you should
+be able to find where it is. China, Russia,
+
+901
+01:10:13,796 --> 01:10:16,972
+India, wherever right?
+This is the website, you go
+
+902
+01:10:16,984 --> 01:10:20,110
+there, put the address,
+it tells you where it is.
+
+903
+01:10:20,110 --> 01:10:22,851
+Find the owner who
+owns the website. You can
+
+904
+01:10:22,863 --> 01:10:25,104
+go to this place and
+you can find the owner of
+
+905
+01:10:25,129 --> 01:10:32,550
+anything, who owns rajjain.com.
+We still have 10 minutes,
+
+906
+01:10:32,550 --> 01:10:37,190
+so please don't go anywhere. And
+the name server of the wustl domain,
+
+907
+01:10:37,190 --> 01:10:39,765
+what is the name
+server of wustl.edu? So if
+
+908
+01:10:39,777 --> 01:10:42,540
+you go to this place
+and you ask for the name,
+
+909
+01:10:42,540 --> 01:10:45,083
+the server will tell you
+who the name server
+
+910
+01:10:45,095 --> 01:10:47,650
+is, and where is the
+name server is located.
+
+911
+01:10:47,650 --> 01:10:51,566
+So all of this information is public
+information. If somebody ever hits you with
+
+912
+01:10:51,566 --> 01:10:54,023
+anything then you can
+figure out where in the
+
+913
+01:10:54,035 --> 01:10:56,504
+world they are. And
+then and so on, so forth.
+
+914
+01:10:56,504 --> 01:11:00,370
+It's very easy because all
+you do is plug it into a website.
+
+915
+01:11:00,370 --> 01:11:03,476
+Alright, continue. OK,
+now electronic mail. I
+
+916
+01:11:03,488 --> 01:11:06,810
+still have 10 minutes. I
+gotta use every minute.
+
+917
+01:11:06,810 --> 01:11:11,930
+So. Electronic mail, uses a protocol called
+
+918
+01:11:11,930 --> 01:11:15,500
+SMTP, simple mail transfer protocol.
+
+919
+01:11:20,090 --> 01:11:25,520
+OK, and it is also client server, so,
+
+920
+01:11:25,520 --> 01:11:28,950
+The servers are speaking with SMTP.
+
+921
+01:11:28,950 --> 01:11:32,671
+And the agents
+are also. Basically,
+
+922
+01:11:32,696 --> 01:11:35,830
+The protocol is SMTP, so
+from one server to the next.
+
+923
+01:11:35,830 --> 01:11:39,407
+Several are using SMTP
+and the user agents also
+
+924
+01:11:39,419 --> 01:11:42,708
+speak SMTP. So, the
+outgoing message queue.
+
+925
+01:11:42,708 --> 01:11:48,833
+So when you send a message,
+it goes into the server and it
+
+926
+01:11:48,833 --> 01:11:54,590
+stays there in a queue.
+Mail is not instantaneous.
+
+927
+01:11:54,590 --> 01:12:00,534
+Messages send whenever they can send.
+Right, so it stays in the queue and from
+
+928
+01:12:00,534 --> 01:12:03,294
+there it could go to some other queue.
+
+929
+01:12:03,306 --> 01:12:06,310
+It stays there, then from there it
+goes to some other queue.
+
+930
+01:12:06,310 --> 01:12:09,342
+So basically the mail
+servers have to figure
+
+931
+01:12:09,354 --> 01:12:12,195
+out where to go next,
+but it goes through
+
+932
+01:12:12,195 --> 01:12:16,310
+many servers and in the end
+finally waits at the final user server.
+
+933
+01:12:16,310 --> 01:12:19,029
+So if it is going to this
+user it will wait here.
+
+934
+01:12:19,041 --> 01:12:21,608
+If it is for this user
+it will wait there, and
+
+935
+01:12:21,608 --> 01:12:27,100
+then the user will pull it out and so on.
+So it is a simple mail transfer protocol.
+
+936
+01:12:27,100 --> 01:12:29,830
+This is also a very
+old protocol, and
+
+937
+01:12:29,842 --> 01:12:33,090
+therefore it uses only
+7 bit ASCII messages.
+
+938
+01:12:33,090 --> 01:12:39,290
+There's another complication.
+ASCII is only 7 bit. 7 bit means 2^7,
+
+939
+01:12:39,290 --> 01:12:47,743
+127 is the maximum. Zero
+to 127. Right, and so all binary
+
+940
+01:12:47,768 --> 01:12:52,234
+objects have to be converted. Now,
+this was done in 19-, maybe 70s, right.
+
+941
+01:12:52,259 --> 01:12:57,470
+So the thing is at that time we didn't know
+about sound and video and things like that.
+
+942
+01:12:57,470 --> 01:13:01,307
+Now if you're going to send
+sound, what do we do?
+
+943
+01:13:01,332 --> 01:13:07,000
+We convert that into ASCII.
+We take your bits, sound bits,
+
+944
+01:13:07,000 --> 01:13:10,272
+convert that into ASCII, and then at
+
+945
+01:13:10,272 --> 01:13:15,355
+the other end, convert it back
+into sound. Alright? 7 bit ASCII.
+
+946
+01:13:15,380 --> 01:13:18,690
+All binary objects have to
+be converted to ASCII and use
+
+947
+01:13:18,702 --> 01:13:21,850
+port 25 at the server. So
+this is a standard port 25.
+
+948
+01:13:21,850 --> 01:13:23,842
+Now, here is a message.
+
+949
+01:13:27,140 --> 01:13:32,300
+So you talk again in ASCII.
+
+950
+01:13:32,300 --> 01:13:38,039
+You can set telnet to this host
+using Port 25 because 25 is
+
+951
+01:13:38,039 --> 01:13:43,170
+spoken by the mail server. If you do this
+and if it worked on your computer nowadays,
+
+952
+01:13:43,170 --> 01:13:48,146
+much of this doesn't work anymore
+because telnet is very insecure, so
+
+953
+01:13:48,146 --> 01:13:53,580
+most people might have banned
+telnet. But assuming that it is working,
+
+954
+01:13:53,580 --> 01:13:58,060
+then you can talk to port 25
+and then as soon as you connect,
+
+955
+01:13:58,060 --> 01:14:02,280
+the server will say 220 post office.
+
+956
+01:14:02,280 --> 01:14:06,800
+Blah blah blah. 75, ready, at this time.
+
+957
+01:14:09,940 --> 01:14:12,086
+Right, so it says that I am
+
+958
+01:14:12,086 --> 01:14:18,550
+this guy, you connected to me. Then you
+say hello. And because I don't know why,
+
+959
+01:14:18,550 --> 01:14:22,460
+but hello is spelled as HELO.
+
+960
+01:14:22,460 --> 01:14:26,623
+OK. You say hello, I am
+
+961
+01:14:26,648 --> 01:14:29,991
+from acm.org and the
+server says OK, So I am
+
+962
+01:14:30,016 --> 01:14:33,038
+supposed to talk to it, and
+now this hello is full HELLO
+
+963
+01:14:33,063 --> 01:14:37,004
+and this is the difference
+between these two hello's, is this is
+
+964
+01:14:37,029 --> 01:14:41,086
+Just a common courtesy
+thing, and this is a command.
+
+965
+01:14:43,430 --> 01:14:49,330
+OK, this is like in the previous example,
+in the HTTP we had a GET which was a
+
+966
+01:14:49,330 --> 01:14:52,105
+command, and everything
+else was text after the
+
+967
+01:14:52,117 --> 01:14:55,079
+colon. So this is after
+the colon, whatever it is.
+
+968
+01:14:55,079 --> 01:14:57,953
+So this is 250, and this
+is hello. And then you
+
+969
+01:14:57,965 --> 01:15:00,633
+say MAIL FROM. So now
+you say I want to send a mail
+
+970
+01:15:00,658 --> 01:15:06,220
+which will be from jain@acm.org.
+So we said OK, Sender is OK.
+
+971
+01:15:06,220 --> 01:15:13,092
+Then you say it is going to
+jain@wustl.edu, and the server says,
+
+972
+01:15:13,092 --> 01:15:19,006
+that's fine. Then you send data,
+"this is a test email," blah blah blah
+
+973
+01:15:19,006 --> 01:15:21,898
+and then you end it
+with a dot. Period. Right
+
+974
+01:15:21,923 --> 01:15:23,930
+there on your computer.
+You put a period.
+
+975
+01:15:27,908 --> 01:15:29,642
+OK, and nothing else on that
+
+976
+01:15:29,642 --> 01:15:31,715
+line because a period
+could be here too
+
+977
+01:15:31,727 --> 01:15:34,385
+somewhere, right? This
+period? That period doesn't
+
+978
+01:15:34,385 --> 01:15:36,761
+count. When there is a
+carriage return, an empty
+
+979
+01:15:36,773 --> 01:15:39,258
+line, and a period that is
+the end of the message.
+
+980
+01:15:42,234 --> 01:15:48,585
+Now the server will say, I
+will queue this mail for delivery.
+
+981
+01:15:48,610 --> 01:15:52,340
+Fine, the client says
+"quit" and the server says
+
+982
+01:15:52,340 --> 01:15:58,060
+I'm closing the connection.
+And done, that's how mail goes.
+
+983
+01:15:58,060 --> 01:16:00,451
+Of course, you don't
+do any of this every day,
+
+984
+01:16:00,476 --> 01:16:03,910
+because your Outlook
+does it for you. Yeah.
+
+985
+01:16:10,470 --> 01:16:14,676
+How many characters?
+OK, so I don't know of any
+
+986
+01:16:14,701 --> 01:16:16,910
+limitation. The question is
+what is the maximum size
+
+987
+01:16:16,910 --> 01:16:19,269
+mail can be? I mean,
+WashU has put a
+
+988
+01:16:19,281 --> 01:16:22,228
+20-megabyte maximum,
+but that is not the mail
+
+989
+01:16:22,228 --> 01:16:27,670
+limitation, that is WashU putting that
+because they don't want to send too much.
+
+990
+01:16:29,779 --> 01:16:31,420
+Theoretically, yes, yeah.
+
+991
+01:16:35,725 --> 01:16:40,197
+Yes, the answer is yes, but we
+will not talk about authentication
+
+992
+01:16:40,222 --> 01:16:43,940
+and security until the last
+module. So there is a secure email.
+
+993
+01:16:43,940 --> 01:16:49,294
+Next, was there anything
+else? There is an authentication,
+
+994
+01:16:49,294 --> 01:16:54,000
+but not here. Not in this chapter.
+
+995
+01:16:54,000 --> 01:17:00,240
+Alright, so HTTP is non-persistent.
+TCP-SMTP is persistent.
+
+996
+01:17:00,265 --> 01:17:04,041
+It is mostly pull, so you are
+mostly getting it from the server.
+
+997
+01:17:04,070 --> 01:17:08,982
+SMTP is mostly push, giving it to
+the server. It accepts binary objects,
+
+998
+01:17:08,982 --> 01:17:12,085
+it accepts only 7 bit
+ASCII, one object per
+
+999
+01:17:12,110 --> 01:17:14,400
+response. You can have
+multiple objects per message,
+
+1000
+01:17:14,400 --> 01:17:17,039
+so basically we will talk
+
+1001
+01:17:17,039 --> 01:17:22,550
+about as to how to do multiple objects.
+
+1002
+01:17:22,550 --> 01:17:28,370
+Actually we will not, but there is a way.
+There is a way that might be in the book.
+
+1003
+01:17:28,370 --> 01:17:34,180
+There is a way to send multiple objects
+one after another. OK, and nowadays
+
+1004
+01:17:34,180 --> 01:17:37,940
+messages do consist of multiple
+objects, so let me come back to here.
+
+1005
+01:17:37,940 --> 01:17:41,696
+So basically this is the
+difference between the
+
+1006
+01:17:41,721 --> 01:17:44,690
+two. And so then, how
+do you get the message?
+
+1007
+01:17:44,690 --> 01:17:50,310
+How do you get the mail? So you can use
+
+1008
+01:17:50,310 --> 01:17:55,660
+SMTP, if it is always accessible. Right?
+But most of us are not always accessible,
+
+1009
+01:17:55,660 --> 01:18:02,320
+so we have to use POP and IMAP.
+POP is the Post office protocol.
+
+1010
+01:18:02,320 --> 01:18:04,011
+Nowadays we have
+version three so it is
+
+1011
+01:18:04,023 --> 01:18:06,422
+called POP3, and Internet
+Mail access protocol
+
+1012
+01:18:06,447 --> 01:18:11,497
+is even a newer one, IMAP. And then
+you can also use HTTP. So many of
+
+1013
+01:18:11,497 --> 01:18:16,065
+you are using Office 365 or
+something where your Mail comes from
+
+1014
+01:18:16,065 --> 01:18:20,899
+Yahoo or Google on the web page. So they're
+not using any of this, they're using HTTP.
+
+1015
+01:18:23,522 --> 01:18:25,659
+We are generally using
+
+1016
+01:18:25,684 --> 01:18:31,530
+either POP or IMAP, right?
+So we'll talk about that next time.
+
+1017
+01:18:31,530 --> 01:18:35,625
+There's a lab and there is
+homework. Both are due next Monday.
+

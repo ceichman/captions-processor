@@ -1,0 +1,17 @@
+1
+timing
+this is content.  the previous break had a double  space in it.      five spaces before this. 
+
+2
+timing2
+more  content here, of the  captions.  spaces space   
+this is a multiple line caption, with some extra spaces. 
+
+3
+timing3
+ conteont
+
+4
+timing4
+notrim.
+
