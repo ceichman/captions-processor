@@ -15,10 +15,11 @@ public class CaptionsProcessor {
 
 	private static final String SPACE_DELINEATOR = " ";
 	private static final String NEWLINE_DELINEATOR = "\n";
-	
+	private static final String EMPTY_PLACEHOLDER = "[no speech detected]";
+
 	private static final String CAPTION_BREAK_DELINEATOR = NEWLINE_DELINEATOR;  //exists to give the option of preserving newlines in caption content string
 	private static final boolean ENABLE_CONSOLE_OUTPUT = true;
-	
+
 	private static final int FIRST_CHARACTER = 0;
 
 	/**
@@ -80,8 +81,37 @@ public class CaptionsProcessor {
 				break;
 			}
 		}        //while breaks with offset at index of breakline
-		captionContent = captionContent.substring(0, captionContent.length() - CAPTION_BREAK_DELINEATOR.length()); //cut off the trailing caption break delineator
+		if (captionContent != "") {  //if the caption isn't empty
+			captionContent = captionContent.substring(0, captionContent.length() - CAPTION_BREAK_DELINEATOR.length()); //cut off the trailing caption break delineator
+		}
 		return new Caption(captionNumber, captionTiming, captionContent);
+	}
+	//FIXME: parseCaption doesn't like empty caption content.
+
+
+	/**
+	 * Removes Captions from a corresponding List that have empty or placeholder content.
+	 * @param captions The List of Captions to be analyzed
+	 * @return The new List of Captions with removals performed
+	 */
+	private static List<Caption> removeEmptyCaptions(List<Caption> captions) {
+		if (ENABLE_CONSOLE_OUTPUT) System.out.print("Removing empty captions... ");
+		int captionsRemoved = 0;
+		List<Caption> newCaptions = new LinkedList<>();
+		
+		for (Caption caption : captions) {
+			newCaptions.add(caption);
+		}
+		for (Caption caption : captions) {
+			String content = caption.getContent();
+			if (content.equals(EMPTY_PLACEHOLDER) || content.equals("")) {
+				newCaptions.remove(caption);
+				captionsRemoved++;
+			}
+		}
+		
+		if (ENABLE_CONSOLE_OUTPUT) System.out.println(captionsRemoved + " captions removed");
+		return newCaptions;
 	}
 
 	/**
@@ -95,7 +125,7 @@ public class CaptionsProcessor {
 		if (ENABLE_CONSOLE_OUTPUT) System.out.print("Replacing \"" + search + "\" with \"" + replace + "\"... ");
 		int replacementsPerformed = 0;
 		String target = "(?i)" + search;
-		
+
 		for (Caption caption : captions) {
 			String originalContent = caption.getContent();
 			String unreplaced = originalContent;
@@ -156,7 +186,7 @@ public class CaptionsProcessor {
 	private static int trimTrailingSpaces(List<Caption> captions) {
 		if (ENABLE_CONSOLE_OUTPUT) System.out.print("Removing trailing spaces... ");
 		int spacesRemoved = 0;
-		
+
 		for (Caption caption : captions) {
 			String originalContent = caption.getContent();
 			String newContent = originalContent.trim();
@@ -165,11 +195,11 @@ public class CaptionsProcessor {
 			}
 			caption.setContent(newContent);
 		}
-		
+
 		if (ENABLE_CONSOLE_OUTPUT) System.out.println(spacesRemoved + " successful trims performed");
 		return spacesRemoved;
 	}
-	
+
 	/**
 	 * Capitalizes the first letter in sentences of caption content. Should be used after trimTrailingSpaces to ensure first sentence is capitalized.
 	 * @param captions The List of Captions to be analyzed
@@ -180,7 +210,7 @@ public class CaptionsProcessor {
 		int capitalizationsPerformed = 0;
 		boolean firstCaption = true;
 		boolean nextShouldCapitalize = false;
-		
+
 		for (Caption caption : captions) {
 			char[] temp = caption.getContent().toCharArray();  //store the chars in an array temporarily
 			List<Character> chars = new LinkedList<>();
@@ -207,11 +237,13 @@ public class CaptionsProcessor {
 			for (char c : chars) {
 				newCaptionContent = newCaptionContent + c;
 			}
-			if (newCaptionContent.substring(newCaptionContent.length() - 1).equals(".")) {
-				nextShouldCapitalize = true;
+			if (newCaptionContent.length() > 0) {
+				if (newCaptionContent.substring(newCaptionContent.length() - 1).equals(".")) {
+					nextShouldCapitalize = true;
+				}
+				else nextShouldCapitalize = false;
 			}
-			else nextShouldCapitalize = false;
-			
+
 			caption.setContent(newCaptionContent);  //update caption contents
 			firstCaption = false;
 		}
@@ -219,7 +251,7 @@ public class CaptionsProcessor {
 		if (ENABLE_CONSOLE_OUTPUT) System.out.println(capitalizationsPerformed + " capitalizations performed");
 		return capitalizationsPerformed;
 	}
-	
+
 	/**
 	 * Prints the specified List of Captions with correct formatting.
 	 * @param captions The List of Captions to be printed
@@ -242,6 +274,7 @@ public class CaptionsProcessor {
 		List<String> lines = fileToList(file);
 		List<Caption> captions = listToCaptions(lines);
 		//edits performed
+		captions = removeEmptyCaptions(captions);
 		searchAndReplace(captions, "space", "yiker");
 		searchAndReplace(captions, "peer to peer", "peer-to-peer");
 		removeMultipleSpaces(captions);

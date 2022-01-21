@@ -15,3 +15,14 @@ timing3
 timing4
 notrim. peer to peer.  
 
+5
+timing5
+[no speech detected]
+
+6
+timing6
+got that captions,
+
+7
+timing7
+of course we do. 
