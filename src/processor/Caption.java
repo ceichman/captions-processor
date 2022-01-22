@@ -1,5 +1,7 @@
 package processor;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 public class Caption {
@@ -38,6 +40,29 @@ public class Caption {
 			return false;
 		Caption other = (Caption) obj;
 		return Objects.equals(content, other.content) && number == other.number && Objects.equals(timing, other.timing);
+	}
+	
+	/**
+	 * Converts a Caption to a List of Strings representing each word in the Caption's content.
+	 * @param caption The Caption to be broken up into words
+	 * @return The List of words (space-delimited strings)
+	 */
+	public List<String> toWords() {
+		List<String> words = new LinkedList<>();
+		String[] wordArray = this.content.split(" "); //store the words in array temporarily
+		for (String word : wordArray) {  //copy the array into a list of chars
+			words.add(word);
+		}
+		return words;
+	}
+	
+	public List<Character> toCharacters() {
+		char[] temp = this.content.toCharArray();  //store the chars in an array temporarily
+		List<Character> chars = new LinkedList<>();
+		for (char c : temp) {    //copy the array into a list of chars
+			chars.add(c);
+		}
+		return chars;
 	}
 	
 	public String toString() {
