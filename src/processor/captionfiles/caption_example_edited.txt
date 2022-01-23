@@ -9,11 +9,11 @@ this is a multiple line caption, with some extra spaces.
 
 3
 timing3
- conteont
+ conteont? 
 
 4
 timing4
-notrim. peer to peer.  
+notrim. peer to peer?  
 
 5
 timing5
@@ -21,7 +21,7 @@ timing5
 
 6
 timing6
-got that captions,
+got That Unnecessary capitalizations,
 
 7
 timing7

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,8 +20,11 @@ public class CaptionsProcessor {
 
 	private static final String CAPTION_BREAK_DELINEATOR = NEWLINE_DELINEATOR;  //exists to give the option of preserving newlines in caption content string
 	private static final boolean ENABLE_CONSOLE_OUTPUT = true;
+	private static boolean REPLACE_CONSOLE_OUTPUT = ENABLE_CONSOLE_OUTPUT;  //a special console output setting only for searchAndReplace()
 
 	private static final int FIRST_CHARACTER = 0;
+	private static final int SEARCH = 0;
+	private static final int REPLACE = 1;
 
 	/**
 	 * Returns a List<String> containing each line of a text file in a new entry.
@@ -86,8 +90,9 @@ public class CaptionsProcessor {
 		}
 		return new Caption(captionNumber, captionTiming, captionContent);
 	}
-	//FIXME: parseCaption doesn't like empty caption content.
-
+	//FIXME: parseCaption doesn't like empty caption content or leading/trailing carriage returns in the document; maybe fix this in linesToCaption method
+	//maybe do this using a line ticker? keeps track of current line
+	//either way it needs to be redesigned
 
 	/**
 	 * Removes Captions from a corresponding List that have empty or placeholder content.
@@ -98,7 +103,7 @@ public class CaptionsProcessor {
 		if (ENABLE_CONSOLE_OUTPUT) System.out.print("Removing empty captions... ");
 		int captionsRemoved = 0;
 		List<Caption> newCaptions = new LinkedList<>();
-		
+
 		for (Caption caption : captions) {
 			newCaptions.add(caption);
 		}
@@ -109,9 +114,29 @@ public class CaptionsProcessor {
 				captionsRemoved++;
 			}
 		}
-		
+
 		if (ENABLE_CONSOLE_OUTPUT) System.out.println(captionsRemoved + " captions removed");
 		return newCaptions;
+	}
+
+	/**
+	 * Runs the searchAndReplace method multiple times using a set of predetermined replacement operations stored in a double array.
+	 * Replacement double array second index 0 represents the target string, and second index 1 represents its replacement.
+	 * replacements[].length() should always be 2, but replacements.length can be as long as needed.
+	 * @param captions The List of Captions to be analyzed
+	 * @param replacements The String[][] of replacements to be performed; see above
+	 * @return The total number of replacements performed
+	 */
+	private static int multipleReplace(List<Caption> captions, String[][] replacements) {
+		int totalReplacements = 0;
+		System.out.print("Performing multiple content replacements... ");
+		REPLACE_CONSOLE_OUTPUT = false; //don't output to console for a replaceMultiple operation
+		for (String[] replacement : replacements) {
+			totalReplacements += searchAndReplace(captions, replacement[SEARCH], replacement[REPLACE]);
+		}
+		System.out.println(totalReplacements + " total replacements performed");
+		REPLACE_CONSOLE_OUTPUT = ENABLE_CONSOLE_OUTPUT; //return the field to its original value
+		return totalReplacements;
 	}
 
 	/**
@@ -122,7 +147,7 @@ public class CaptionsProcessor {
 	 * @return The number of successful replacements performed
 	 */
 	private static int searchAndReplace(List<Caption> captions, String search, String replace) {
-		if (ENABLE_CONSOLE_OUTPUT) System.out.print("Replacing \"" + search + "\" with \"" + replace + "\"... ");
+		if (REPLACE_CONSOLE_OUTPUT) System.out.print("Replacing \"" + search + "\" with \"" + replace + "\"... ");
 		int replacementsPerformed = 0;
 		String target = "(?i)" + search;
 
@@ -138,7 +163,7 @@ public class CaptionsProcessor {
 			caption.setContent(replaced);
 		}
 
-		if (ENABLE_CONSOLE_OUTPUT) System.out.println(replacementsPerformed + " replacements performed");
+		if (REPLACE_CONSOLE_OUTPUT) System.out.println(replacementsPerformed + " replacements performed");
 		return replacementsPerformed;
 	}
 
@@ -152,11 +177,7 @@ public class CaptionsProcessor {
 		int spacesRemoved = 0;
 
 		for (Caption caption : captions) {
-			char[] temp = caption.getContent().toCharArray();  //store the chars in an array temporarily
-			List<Character> chars = new LinkedList<>();
-			for (char c : temp) {    //copy the array into a list of chars
-				chars.add(c);
-			}
+			List<Character> chars = caption.toCharacters();
 			List<Integer> queuedForRemoval = new LinkedList<Integer>();   
 			for (int i = 0; i < chars.size() - 1; i++) {
 				if (chars.get(i) == ' ' && chars.get(i + 1) == ' ') { //if this and the next character are spaces
@@ -201,6 +222,36 @@ public class CaptionsProcessor {
 	}
 
 	/**
+	 * Decapitalizes all words in Caption content that aren't acronyms or the words "I" or "I'll".
+	 * @param The List of Captions to be analyzed
+	 * @return The number of decapitalizations performed, including words that were already all lowercase
+	 */
+	private static int decapitalize(List<Caption> captions) {
+		if (ENABLE_CONSOLE_OUTPUT) System.out.print("Decapitalizing unecessary words... ");
+		int decapitalizationsPerformed = 0;
+
+		for (Caption caption : captions) {
+			List<String> words = caption.toWords();
+			List<String> newWords = new LinkedList<>();
+			for (String word : words) {  //for each word in the current caption's content,
+				if (!(Caption.isAllCaps(word) || word.equals("I") || word.equals("I'll"))) {  //if the word isn't in all caps (an acronym), or the word "I" or "I'll"
+					newWords.add(Caption.decapitalize(word));  //make all the letters lowercase
+					decapitalizationsPerformed++;
+				}
+			}
+			String newContent = "";          //rebuild the string's content from the edited list of words
+			for (String word : newWords) {
+				newContent = newContent + word + " ";
+			}
+			newContent = newContent.trim();  //remove the trailing space
+			caption.setContent(newContent);   //update the caption's content
+		}
+
+		if (ENABLE_CONSOLE_OUTPUT) System.out.println(decapitalizationsPerformed + " decapitalizations performed");
+		return decapitalizationsPerformed;
+	}
+
+	/**
 	 * Capitalizes the first letter in sentences of caption content. Should be used after trimTrailingSpaces to ensure first sentence is capitalized.
 	 * @param captions The List of Captions to be analyzed
 	 * @return the total number of capitalizations performed in all captions
@@ -212,11 +263,7 @@ public class CaptionsProcessor {
 		boolean nextShouldCapitalize = false;
 
 		for (Caption caption : captions) {
-			char[] temp = caption.getContent().toCharArray();  //store the chars in an array temporarily
-			List<Character> chars = new LinkedList<>();
-			for (char c : temp) {    //copy the array into a list of chars
-				chars.add(c);
-			}
+			List<Character> chars = caption.toCharacters();  //chars stores caption content as individual characters
 			if ((chars.size() != 0 && nextShouldCapitalize) || firstCaption) {  //if we're sure it's supposed to be a new sentence, or it's the first caption of the file:
 				char upper = Character.toUpperCase(chars.get(FIRST_CHARACTER));  //capitalize the first character
 				chars.remove(FIRST_CHARACTER);
@@ -238,7 +285,8 @@ public class CaptionsProcessor {
 				newCaptionContent = newCaptionContent + c;
 			}
 			if (newCaptionContent.length() > 0) {
-				if (newCaptionContent.substring(newCaptionContent.length() - 1).equals(".")) {
+				String lastCharacter = newCaptionContent.substring(newCaptionContent.length() - 1);
+				if (lastCharacter.equals(".") || lastCharacter.equals("?")) {
 					nextShouldCapitalize = true;
 				}
 				else nextShouldCapitalize = false;
@@ -274,11 +322,28 @@ public class CaptionsProcessor {
 		List<String> lines = fileToList(file);
 		List<Caption> captions = listToCaptions(lines);
 		//edits performed
+		String[][] replacements = {
+				{"peer to peer", "peer-to-peer"},
+				{"client server", "client-server"},
+				{"actually", ""},
+				{"basically", ""},
+				{"really", ""},
+				{"i mean", ""},
+				{"you know", ""},
+				{"and and", "and"},
+				{"then then", "then"},
+				{"so so ", "so "},
+				{" so so", " so"},
+				{"TCP IP", "TCP-IP"},
+				{"adopt", "adapt"},
+				{"zoom", "Zoom"},
+				{"washoe", "WashU"}
+		};
 		captions = removeEmptyCaptions(captions);
-		searchAndReplace(captions, "space", "yiker");
-		searchAndReplace(captions, "peer to peer", "peer-to-peer");
+		multipleReplace(captions, replacements);
 		removeMultipleSpaces(captions);
 		trimTrailingSpaces(captions);
+		decapitalize(captions);
 		capitalizeFirstLetters(captions);
 		//output handled
 		if (InputHandler.userConfirm("Console preview", "Post caption preview to console?")) {

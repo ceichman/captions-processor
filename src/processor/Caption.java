@@ -1,5 +1,6 @@
 package processor;
 
+import java.nio.charset.spi.CharsetProvider;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -69,4 +70,33 @@ public class Caption {
 		return number + "\n" + timing + "\n" + content;
 	}
 	
+	/**
+	 * Returns whether the specified string contains nothing but capital letters.
+	 * @param string The String to be analyzed
+	 * @return A boolean
+	 */
+	public static boolean isAllCaps(String string) {
+		char[] chars = string.toCharArray();
+		for (Character c : chars) {
+			if (!Character.isUpperCase(c)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Changes all characters in the specified String lowercase and returns the new String.
+	 * @param string The String to be decapitalized
+	 * @return The decapitalized String
+	 */
+	public static String decapitalize(String string) {
+		String newString = "";
+		char[] chars = string.toCharArray();
+		for (Character c : chars) {
+			newString = newString + Character.toLowerCase(c);
+		}
+		return newString;
+	}
+
 }
